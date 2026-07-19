@@ -9,7 +9,7 @@ function Hero() {
             <h1 className="text-6xl font-semibold">Guess the song.</h1>
             <h1 className="text-6xl font-semibold text-(--text-light)">Before they do.</h1>
         </div>
-        <p className="text-lg w-[80%] text-(--text-light)">A quiet, head-to-head song guessing game. Two players, one snippet, first correct answer wins the round.</p>
+        <p className="text-lg max-w-4xl text-(--text-light)">A quiet, head-to-head song guessing game. Two players, one snippet, first correct answer wins the round.</p>
         <Button variant="primary">Start a Session</Button>
     </div>
 }

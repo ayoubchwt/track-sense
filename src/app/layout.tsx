@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navabar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import { Sora } from "next/font/google";
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,9 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`min-h-full flex flex-col bg-(--bg) ${sora.className}`} suppressHydrationWarning={true}>
+      <body className={`min-h-screen flex flex-col bg-(--bg) ${sora.className}`} suppressHydrationWarning={true}>
         <Navabar></Navabar>
         {children}
+        <Footer></Footer>
       </body>
     </html>
   );
