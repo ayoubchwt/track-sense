@@ -13,19 +13,77 @@ generator client {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  username  String   @unique
-  email     String   @unique
-  password  String   @unique
-  createdAt DateTime @default(now())
-  games Game[] @relation()
+  id              String    @id @default(cuid())
+  username        String    @unique
+  email           String    @unique
+  password        String    @unique
+  createdAt       DateTime  @default(now())
+  gamesAsPlayer   Game[]    @relation("playerGames")
+  gamesAsOpponent Game[]    @relation("OpponentGames")
+  name            String
+  emailVerified   Boolean   @default(false)
+  image           String?
+  updatedAt       DateTime  @updatedAt
+  sessions        Session[]
+  accounts        Account[]
+
+  @@map("user")
 }
 
 model Game {
-  id         Int  @id @default(autoincrement())
+  id         String  @id @default(cuid())
   rounds     Int
-  winner     Int
-  loser      Int
-  winnerUser User @relation(fields: [winner], references: [id])
-  looserUser User @relation(fields: [loser], references: [id])
+  userId     String
+  opponentId String
+  won        Boolean
+  player     User    @relation("playerGames", fields: [userId], references: [id])
+  opponent   User    @relation("OpponentGames", fields: [opponentId], references: [id])
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
 }
