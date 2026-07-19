@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import { mergeCSS } from "@/lib/TailwindUils";
-import { ButtonVariants, ButtonVariantProps } from "@/lib/ButtonVariants";
+import { mergeCSS } from "@/lib/utils/TailwindUils";
+import { ButtonVariants, ButtonVariantProps } from "@/lib/utils/ButtonVariants";
 
 function Button({
     children,

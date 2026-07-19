@@ -1,4 +1,4 @@
-import { mergeCSS } from "@/lib/TailwindUils";
+import { mergeCSS } from "@/lib/utils/TailwindUils";
 import { ReactNode } from "react";
 
 function Ref({ children, href, className }: { children: ReactNode, href?: string, className?: string }) {
