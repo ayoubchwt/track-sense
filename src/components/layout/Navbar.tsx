@@ -1,6 +1,6 @@
 import { Moon } from "lucide-react";
-import Button from "../ui/Button";
-import Ref from "../ui/Ref";
+import Button from "../ui/button";
+import Ref from "../ui/ref";
 
 function Navabar() {
   return <div className="flex items-center justify-around p-3 border-b border-(--border-dark)">

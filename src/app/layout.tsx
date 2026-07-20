@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navabar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import Navabar from "@/components/layout/navbar";
+import Footer from "@/components/layout/footer";
 import { Sora } from "next/font/google";
 export const metadata: Metadata = {
   title: "Create Next App",

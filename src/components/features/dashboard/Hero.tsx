@@ -1,4 +1,4 @@
-import Button from "@/components/ui/Button";
+import Button from "@/components/ui/button";
 
 function Hero() {
     return <div className="flex flex-col items-start justify-center gap-4 border-b pb-30 border-(--border-dark)">

@@ -1,4 +1,4 @@
-import StepCard from "./StepCard";
+import StepCard from "./step-card";
 
 function Steps() {
     return <div className="flex w-full items-center justify-between">
