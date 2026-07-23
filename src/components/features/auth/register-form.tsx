@@ -1,7 +1,6 @@
 import Label from "@/components/ui/label";
 import AuthHeader from "./auth-header";
 import Input from "@/components/ui/input";
-import Checkbox from "@/components/ui/checkbox";
 import Button from "@/components/ui/button";
 import Ref from "@/components/ui/ref";
 
