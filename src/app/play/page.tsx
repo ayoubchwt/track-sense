@@ -1,4 +1,4 @@
 function Play() {
-    return <></>
+  return <></>;
 }
 export default Play;

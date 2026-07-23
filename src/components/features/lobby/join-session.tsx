@@ -1,6 +1,4 @@
 function JoinSession() {
-    return <div>
-        Join Session
-    </div>
+  return <div>Join Session</div>;
 }
 export default JoinSession;
