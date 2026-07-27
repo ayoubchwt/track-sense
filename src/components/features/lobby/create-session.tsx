@@ -7,7 +7,7 @@ import { Copy } from "lucide-react";
 
 function CreateSession() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col flex-1 w-full max-w-4xl">
       <h1 className="text-(--text-light) font-semibold text-md">CREATE</h1>
       <div className="flex flex-col gap-1">
         <Label>Session Name</Label>
@@ -21,8 +21,8 @@ function CreateSession() {
         <Label>Genres</Label>
         <GenreSelector></GenreSelector>
       </div>
-      <div className="felx flex-col gap-1">
-        <Label>Session coded</Label>
+      <div className="flex flex-col gap-1">
+        <Label>Session code</Label>
         <div className="flex items-center justify-between">
           <h2>7F.87H</h2>
           <Button

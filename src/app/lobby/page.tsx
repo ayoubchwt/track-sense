@@ -4,11 +4,13 @@ import LobbyHeader from "@/components/features/lobby/lobby-header";
 
 function Lobby() {
   return (
-    <div className="flex flex-col items-center justify-center flex-1">
-      <LobbyHeader></LobbyHeader>
-      <div className="flex items-center justify-center gap-10">
-        <CreateSession></CreateSession>
-        <JoinSession></JoinSession>
+    <div className="flex flex-col justify-center items-center flex-1">
+      <div className="flex flex-col gap-5">
+        <LobbyHeader></LobbyHeader>
+        <div className="flex items-center justify-center gap-10">
+          <CreateSession></CreateSession>
+          <JoinSession></JoinSession>
+        </div>
       </div>
     </div>
   );
