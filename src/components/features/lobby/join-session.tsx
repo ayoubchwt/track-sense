@@ -7,15 +7,15 @@ import RoomList from "./room-list";
 
 function JoinSession() {
   return (
-    <div className="flex flex-col flex-1 w-full max-w-4xl">
-      <div className="flex flex-col gap-1">
+    <div className="flex flex-col w-full gap-10">
+      <div className="flex flex-col gap-2">
         <Label>Enter code</Label>
         <OTPInput
           maxLength={6}
           containerClassName="group flex items-center has-[:disabled]:opacity-30"
           render={({ slots }) => {
             return (
-              <div className="flex gap-2">
+              <div className="flex gap-5">
                 {slots.map((slot, idx) => (
                   <OtpSlot key={idx} slot={slot}></OtpSlot>
                 ))}
@@ -26,8 +26,8 @@ function JoinSession() {
         <Button variant="optional" className="border border-(--border-dark)">
           Join Session
         </Button>
-        <RoomList></RoomList>
       </div>
+      <RoomList></RoomList>
     </div>
   );
 }
