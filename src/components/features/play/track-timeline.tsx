@@ -19,8 +19,8 @@ function TrackTimeline({
   }, [audioRef]);
 
   return (
-    <div>
-      <p>00:07</p>
+    <div className="flex items-center justify-center gap-2 w-50">
+      <p className="text-sm font-light">00:07</p>
       <div className="h-1 w-full bg-(--border-dark) flex items-center justify-start overflow-hidden rounded-full">
         <div
           className="h-full bg-(--text)"
