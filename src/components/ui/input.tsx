@@ -1,4 +1,4 @@
-import { mergeCSS } from "@/lib/utils/tailwind-uils";
+import { mergeCSS } from "@/lib/utils/tailwind-utils";
 function Input({
   type,
   placeholder,

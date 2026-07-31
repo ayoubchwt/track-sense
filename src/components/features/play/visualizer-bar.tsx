@@ -1,18 +1,20 @@
-import { mergeCSS } from "@/lib/utils/tailwind-uils";
-
+import { mergeCSS } from "@/lib/utils/tailwind-utils";
 function VisualizerBar({
   isActive,
+  height,
   className,
 }: {
   isActive: boolean;
-  className: string;
+  height: number;
+  className?: string;
 }) {
   return (
     <div
       className={mergeCSS(
-        `w-1 ${isActive ? "bg-(--border-light)" : "bg-(--text)"}`,
+        `w-1 rounded-full ${isActive ? "bg-(--text)" : "bg-(--border-dark)"}`,
         className,
       )}
+      style={{ height: `${height}px` }}
     ></div>
   );
 }
