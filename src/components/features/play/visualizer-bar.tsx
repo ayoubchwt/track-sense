@@ -11,7 +11,7 @@ function VisualizerBar({
   return (
     <div
       className={mergeCSS(
-        `w-1 rounded-full ${isActive ? "bg-(--text)" : "bg-(--border-dark)"}`,
+        `w-1.25 rounded-full ${isActive ? "bg-(--text)" : "bg-(--border-dark)"}`,
         className,
       )}
       style={{ height: `${height}px` }}
