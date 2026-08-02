@@ -4,7 +4,7 @@ import SongPlayer from "@/components/features/play/song-player";
 
 function Play() {
   return (
-    <div className="flex flex-col items-center justify-center flex-1">
+    <div className="flex flex-col items-center justify-around flex-1 max-w-5xl mx-auto w-full">
       <PlayProps></PlayProps>
       <SongPlayer></SongPlayer>
       <Competitors></Competitors>

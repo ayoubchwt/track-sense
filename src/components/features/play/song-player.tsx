@@ -33,6 +33,7 @@ function SongPlayer() {
           onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
           onPlay={(e) => syncData(e.currentTarget)}
           onCanPlay={(e) => syncData(e.currentTarget)}
+          className="hidden"
         ></audio>
         <Visualizer currentTime={currentTime} duration={duration}></Visualizer>
       </div>
