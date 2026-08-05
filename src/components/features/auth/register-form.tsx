@@ -12,7 +12,7 @@ function RegisterForm() {
         description="One handle, one score."
       ></AuthHeader>
       <div className="flex flex-col gap-1">
-        <Label>Display name</Label>
+        <Label>Username</Label>
         <Input placeholder="Eclipsino" type="type"></Input>
       </div>
       <div className="flex flex-col gap-1">

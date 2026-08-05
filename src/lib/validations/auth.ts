@@ -5,3 +5,4 @@ export const loginSchema = z.object({
   rememberMe: z.boolean().default(false),
 });
 export type loginFormValues = z.infer<typeof loginSchema>;
+

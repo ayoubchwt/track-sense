@@ -1,28 +1,53 @@
+"use client";
 import Label from "@/components/ui/label";
 import AuthHeader from "./auth-header";
-import Input from "@/components/ui/input";
 import Checkbox from "@/components/ui/checkbox";
 import Ref from "@/components/ui/ref";
 import Button from "@/components/ui/button";
 import Splitter from "@/components/ui/spliter";
+import { Login } from "@/types/auth";
+import { useForm } from "react-hook-form";
+import FormField from "@/components/ui/form-field";
 
 function LoginForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm<Login>();
+  const onSubmit = (data: Login) => {
+    console.log("submitted:", data);
+  };
   return (
-    <div className="w-full max-w-sm flex flex-col gap-5">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full max-w-sm flex flex-col gap-5"
+    >
       <AuthHeader title="Log in" description="Welcome back."></AuthHeader>
       <div className="flex flex-col gap-1">
         <Label>Email</Label>
-        <Input placeholder="you@sound.fm" type="email"></Input>
+        <FormField
+          placeholder="you@sound.fm"
+          type="email"
+          {...register("email")}
+        ></FormField>
       </div>
       <div className="flex flex-col gap-1">
         <Label>Password</Label>
-        <Input placeholder="••••••••" type="password"></Input>
+        <FormField
+          placeholder="••••••••"
+          type="password"
+          {...register("password")}
+        ></FormField>
       </div>
       <div className="flex items-center justify-between">
         <Checkbox text="Remember me"></Checkbox>
         <Ref className="text-xs">Forgot?</Ref>
       </div>
-      <Button variant="primary">Log in</Button>
+      <Button variant="primary" type="submit">
+        Log in
+      </Button>
       <Splitter></Splitter>
       <Button variant="optional" className="border border-(--border-dark)">
         Continue with Spotify
@@ -31,7 +56,7 @@ function LoginForm() {
         <Label className="text-sm">New here ?</Label>
         <Ref className="text-(--text) underline">Create an account</Ref>
       </div>
-    </div>
+    </form>
   );
 }
 export default LoginForm;
