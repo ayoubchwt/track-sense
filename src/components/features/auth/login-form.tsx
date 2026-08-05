@@ -8,14 +8,17 @@ import Splitter from "@/components/ui/spliter";
 import { Login } from "@/types/auth";
 import { useForm } from "react-hook-form";
 import FormField from "@/components/ui/form-field";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "@/lib/validations/auth";
 
 function LoginForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
-  } = useForm<Login>();
+  } = useForm<Login>({
+    resolver: zodResolver(loginSchema),
+  });
   const onSubmit = (data: Login) => {
     console.log("submitted:", data);
   };
@@ -31,6 +34,7 @@ function LoginForm() {
           placeholder="you@sound.fm"
           type="email"
           {...register("email")}
+          error={errors.email?.message}
         ></FormField>
       </div>
       <div className="flex flex-col gap-1">
@@ -39,6 +43,7 @@ function LoginForm() {
           placeholder="••••••••"
           type="password"
           {...register("password")}
+          error={errors.password?.message}
         ></FormField>
       </div>
       <div className="flex items-center justify-between">

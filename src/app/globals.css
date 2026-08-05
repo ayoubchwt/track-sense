@@ -7,4 +7,5 @@
   --bg-light-dimmed: hsl(0, 0, 15%);
   --text: hsl(0, 0%, 0%);
   --text-light: hsl(0, 0%, 44%);
+  --error: hsl(0, 69.89%, 36.47%);
 }

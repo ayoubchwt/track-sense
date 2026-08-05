@@ -7,7 +7,7 @@ function FormField({ error, ...props }: FormFieldProps) {
     <div className="flex flex-col w-full gap-1">
       <Input {...props}></Input>
       {error && (
-        <p className="text-sx text-(--text-light) font-light">{error}</p>
+        <p className="text-sm text-(--error) font-light min-h-2">{error}</p>
       )}
     </div>
   );
