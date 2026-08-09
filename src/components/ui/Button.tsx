@@ -10,11 +10,13 @@ function Button({
   variant,
   className,
   type,
+  disabled,
   onClick,
 }: {
   children: ReactNode;
   variant?: ButtonVariantProps["variant"];
   className?: string;
+  disabled?: boolean;
   type?: "submit" | "reset" | "button" | undefined;
   onClick?: () => void;
 }) {
@@ -23,6 +25,7 @@ function Button({
       onClick={onClick}
       className={mergeCSS(ButtonVariants({ variant }), className)}
       type={type}
+      disabled={disabled}
     >
       {children}
     </button>

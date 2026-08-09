@@ -8,7 +8,15 @@ import { register } from "@/types/auth";
 import FormField from "@/components/ui/form-field";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@/lib/validations/auth";
+import { useState } from "react";
+import { signUp } from "@/lib/auth/auth-client";
+import { useRouter } from "next/navigation";
+import Spinner from "@/components/ui/spinner";
+import ErrorBanner from "@/components/ui/error-banner";
 function RegisterForm() {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -16,8 +24,28 @@ function RegisterForm() {
   } = useForm<register>({
     resolver: zodResolver(registerSchema),
   });
-  const onSubmit = (data: register) => {
-    console.log("submitted : ", data);
+  const onSubmit = async (data: register) => {
+    setServerError(null);
+    await signUp.email(
+      {
+        email: data.email,
+        password: data.password,
+        name: data.username,
+      },
+      {
+        onRequest: () => {
+          setIsLoading(true);
+        },
+        onSuccess: () => {
+          router.push("/");
+          setIsLoading(false);
+        },
+        onError: (req) => {
+          setIsLoading(false);
+          setServerError(req.error.message || "Could not register account");
+        },
+      },
+    );
   };
   return (
     <form
@@ -64,9 +92,14 @@ function RegisterForm() {
           error={errors.confirmPassword?.message}
         ></FormField>
       </div>
-      <Button variant="primary" type="submit">
-        Create account
+      <Button variant="primary" type="submit" disabled={isLoading}>
+        {isLoading ? (
+          <Spinner size="sm" className="border-t-(--bg)"></Spinner>
+        ) : (
+          <>Create account</>
+        )}
       </Button>
+      {serverError && <ErrorBanner message={serverError}></ErrorBanner>}
       <div className="flex items-center justify-center gap-1">
         <Label className="text-sm">Already playing ?</Label>
         <Ref className="text-(--text) underline">Log in</Ref>
