@@ -37,8 +37,8 @@ function RegisterForm() {
           setIsLoading(true);
         },
         onSuccess: () => {
-          router.push("/");
           setIsLoading(false);
+          router.push("/");
         },
         onError: (req) => {
           setIsLoading(false);
