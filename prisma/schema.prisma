@@ -1,43 +1,26 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
+generator client {
+  provider = "prisma-client"
+  output = "../src/lib/generated/prisma"
+}
 
 datasource db {
   provider = "postgresql"
-}
-
-generator client {
-  provider = "prisma-client"
-  output   = "../src/lib/generated/prisma"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id              String    @id @default(cuid())
-  username        String    @unique
-  email           String    @unique
-  password        String    @unique
-  createdAt       DateTime  @default(now())
-  gamesAsPlayer   Game[]    @relation("playerGames")
-  gamesAsOpponent Game[]    @relation("OpponentGames")
-  name            String
-  emailVerified   Boolean   @default(false)
-  image           String?
-  updatedAt       DateTime  @updatedAt
-  sessions        Session[]
-  accounts        Account[]
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
 
+  @@unique([email])
   @@map("user")
-}
-
-model Game {
-  id         String  @id @default(cuid())
-  rounds     Int
-  userId     String
-  opponentId String
-  won        Boolean
-  player     User    @relation("playerGames", fields: [userId], references: [id])
-  opponent   User    @relation("OpponentGames", fields: [opponentId], references: [id])
 }
 
 model Session {
