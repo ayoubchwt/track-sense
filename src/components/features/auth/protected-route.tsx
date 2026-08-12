@@ -1,4 +1,4 @@
-"use client";
+"use client ";
 import Spinner from "@/components/ui/spinner";
 import authClient from "@/lib/auth/auth-client";
 import { useRouter } from "next/navigation";
