@@ -11,9 +11,9 @@ import FormField from "@/components/ui/form-field";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/lib/validations/auth";
 import { useState } from "react";
-import { signIn } from "@/lib/auth/auth-client";
 import Spinner from "@/components/ui/spinner";
 import { useRouter } from "next/navigation";
+import authClient from "@/lib/auth/auth-client";
 
 function LoginForm() {
   const [serverError, setServerError] = useState<string | null>(null);
@@ -29,7 +29,7 @@ function LoginForm() {
   const onSubmit = async (data: Login) => {
     if (!data) return;
     setServerError(null);
-    await signIn.email(
+    await authClient.signIn.email(
       {
         email: data.email,
         password: data.password,
@@ -79,7 +79,7 @@ function LoginForm() {
       </div>
       <Button variant="primary" type="submit" disabled={isLoading}>
         {isLoading ? (
-          <Spinner size="sm" className="border-t-(--bg)"></Spinner>
+          <Spinner size="sm" className="border-t-(--bg) border-l-(--bg)"></Spinner>
         ) : (
           <>Log in</>
         )}

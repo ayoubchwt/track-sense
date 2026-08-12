@@ -9,10 +9,10 @@ import FormField from "@/components/ui/form-field";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@/lib/validations/auth";
 import { useState } from "react";
-import { signUp } from "@/lib/auth/auth-client";
 import { useRouter } from "next/navigation";
 import Spinner from "@/components/ui/spinner";
 import ErrorBanner from "@/components/ui/error-banner";
+import authClient from "@/lib/auth/auth-client";
 function RegisterForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +26,7 @@ function RegisterForm() {
   });
   const onSubmit = async (data: register) => {
     setServerError(null);
-    await signUp.email(
+    await authClient.signUp.email(
       {
         email: data.email,
         password: data.password,
@@ -94,7 +94,10 @@ function RegisterForm() {
       </div>
       <Button variant="primary" type="submit" disabled={isLoading}>
         {isLoading ? (
-          <Spinner size="sm" className="border-t-(--bg)"></Spinner>
+          <Spinner
+            size="sm"
+            className="border-t-(--bg) border-l-(--bg)"
+          ></Spinner>
         ) : (
           <>Create account</>
         )}
