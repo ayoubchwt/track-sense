@@ -1,5 +1,5 @@
 import { HandleError } from "@/lib/error/error-handler";
-import { getGameTracks } from "@/lib/spotify/api";
+import { getGameTracks } from "@/lib/iTunes/api";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
