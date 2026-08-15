@@ -10,6 +10,7 @@ export async function GET(request: Request) {
     const tracks = await getGameTracks(query, limit);
     return NextResponse.json({ tracks });
   } catch (error: unknown) {
+    console.log("Error :", error);
     return NextResponse.json(HandleError(error));
   }
 }

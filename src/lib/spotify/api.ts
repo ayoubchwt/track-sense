@@ -1,5 +1,5 @@
 import "server-only";
-import { GameTrack, TokenResposne } from "@/types/spotify";
+import { GameTrack, TokenResponse } from "@/types/spotify";
 
 // need this to get the token for the request
 export async function sendAuthorizationRequest() {
@@ -14,13 +14,15 @@ export async function sendAuthorizationRequest() {
     method: "POST",
     headers: {
       Authorization: `Basic ${AuthBuffer}`,
+      "Content-Type": "application/x-www-form-urlencoded",
     },
+    body: "grant_type=client_credentials",
   };
   const response = await fetch(
     "https://accounts.spotify.com/api/token",
     requestionOptions,
   );
-  const data: TokenResposne = await response.json();
+  const data: TokenResponse = await response.json();
   return data.access_token;
 }
 // getting track by genre
@@ -37,6 +39,10 @@ export async function getGameTracks(
       },
     },
   );
+  if (!response.ok) {
+    console.log(response.json().catch(() => null));
+    return [];
+  }
   const data = await response.json();
   const tracksWithPerview = data.tracks.items.filter(
     (track: GameTrack) => track.preview_url !== null,
