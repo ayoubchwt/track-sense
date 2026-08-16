@@ -9,7 +9,7 @@ function GenreSquare({
 }) {
   return (
     <div
-      className={`p-2 border text-sm rounded-md ${isSelected ? "border-(--text) text-(--text)" : "border-(--border-dark) text-(--text-light)"}`}
+      className={`p-2 border text-sm rounded-md cursor-pointer ${isSelected ? "border-(--text) text-(--text)" : "border-(--border-dark) text-(--text-light)"}`}
       onClick={onClick}
     >
       {text}

@@ -4,10 +4,9 @@ import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const query = searchParams.get("query") || "genre:pop";
-  const limit = Number(searchParams.get("limit")) || 10;
+  const query = searchParams.get("query") || "pop";
   try {
-    const tracks = await getGameTracks(query, limit);
+    const tracks = await getGameTracks(query);
     return NextResponse.json({ tracks });
   } catch (error: unknown) {
     console.log("Error :", error);

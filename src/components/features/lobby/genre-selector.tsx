@@ -12,14 +12,24 @@ function GenreSelector() {
         onClick={() => setGenre("Pop")}
       ></GenreSquare>
       <GenreSquare
-        text="Rap"
-        isSelected={genre === "Rap"}
-        onClick={() => setGenre("Rap")}
-      ></GenreSquare>
-      <GenreSquare
         text="Rock"
         isSelected={genre === "Rock"}
         onClick={() => setGenre("Rock")}
+      ></GenreSquare>
+      <GenreSquare
+        text="Hiphop"
+        isSelected={genre === "Hiphop"}
+        onClick={() => setGenre("Hiphop")}
+      ></GenreSquare>
+      <GenreSquare
+        text="R&B"
+        isSelected={genre === "rnb"}
+        onClick={() => setGenre("rnb")}
+      ></GenreSquare>
+      <GenreSquare
+        text="Global"
+        isSelected={genre === "Global"}
+        onClick={() => setGenre("Global")}
       ></GenreSquare>
     </div>
   );

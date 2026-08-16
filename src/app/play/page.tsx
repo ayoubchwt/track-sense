@@ -7,13 +7,11 @@ import { useEffect } from "react";
 function Play() {
   useEffect(() => {
     async function fetchGameTracks() {
-      const response = await fetch("/api/game/tracks?query=genre:pop&limit=10");
-
+      const response = await fetch("/api/game/tracks?query=rock");
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || "Failed to fetch tracks");
       }
-
       const data = await response.json();
       console.log(data);
     }
