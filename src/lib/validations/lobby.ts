@@ -5,3 +5,6 @@ export const createSessionSchema = z.object({
   rounds: z.any(),
   sessionCode: z.any(),
 });
+export const JoingSessionSchema = z.object({
+  sessionCode: z.string().min(6, "Please enter a valid session code"),
+});

@@ -4,3 +4,6 @@ export interface CreateSession {
   genres: string;
   sessionCode: string;
 }
+export interface JoinSession {
+  sessionCode: string;
+}
