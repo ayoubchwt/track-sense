@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client"
-  output = "../src/lib/generated/prisma"
+  output   = "../src/lib/generated/prisma"
 }
 
 datasource db {
@@ -69,4 +69,12 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model Lobby {
+  id          String @id @default(cuid())
+  sessionCode String @unique
+  sessionName String
+  rounds      Int
+  genres      String
 }

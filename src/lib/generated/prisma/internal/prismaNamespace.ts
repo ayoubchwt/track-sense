@@ -393,7 +393,8 @@ export const ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  Lobby: 'Lobby'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -409,7 +410,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification"
+    modelProps: "user" | "session" | "account" | "verification" | "lobby"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -709,6 +710,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Lobby: {
+      payload: Prisma.$LobbyPayload<ExtArgs>
+      fields: Prisma.LobbyFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LobbyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LobbyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>
+        }
+        findFirst: {
+          args: Prisma.LobbyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LobbyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>
+        }
+        findMany: {
+          args: Prisma.LobbyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>[]
+        }
+        create: {
+          args: Prisma.LobbyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>
+        }
+        createMany: {
+          args: Prisma.LobbyCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LobbyCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>[]
+        }
+        delete: {
+          args: Prisma.LobbyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>
+        }
+        update: {
+          args: Prisma.LobbyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>
+        }
+        deleteMany: {
+          args: Prisma.LobbyDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LobbyUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LobbyUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>[]
+        }
+        upsert: {
+          args: Prisma.LobbyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>
+        }
+        aggregate: {
+          args: Prisma.LobbyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLobby>
+        }
+        groupBy: {
+          args: Prisma.LobbyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LobbyGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LobbyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LobbyCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -806,6 +881,17 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
+export const LobbyScalarFieldEnum = {
+  id: 'id',
+  sessionCode: 'sessionCode',
+  sessionName: 'sessionName',
+  rounds: 'rounds',
+  genres: 'genres'
+} as const
+
+export type LobbyScalarFieldEnum = (typeof LobbyScalarFieldEnum)[keyof typeof LobbyScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -882,6 +968,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 /**
@@ -975,6 +1075,7 @@ export type GlobalOmitConfig = {
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit
+  lobby?: Prisma.LobbyOmit
 }
 
 /* Types for Logging */
