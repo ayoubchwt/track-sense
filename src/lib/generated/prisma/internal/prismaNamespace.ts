@@ -394,7 +394,8 @@ export const ModelName = {
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
-  Lobby: 'Lobby'
+  GameSession: 'GameSession',
+  SessionPlayer: 'SessionPlayer'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -410,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "lobby"
+    modelProps: "user" | "session" | "account" | "verification" | "gameSession" | "sessionPlayer"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -710,77 +711,151 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Lobby: {
-      payload: Prisma.$LobbyPayload<ExtArgs>
-      fields: Prisma.LobbyFieldRefs
+    GameSession: {
+      payload: Prisma.$GameSessionPayload<ExtArgs>
+      fields: Prisma.GameSessionFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.LobbyFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload> | null
+          args: Prisma.GameSessionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.LobbyFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>
+          args: Prisma.GameSessionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>
         }
         findFirst: {
-          args: Prisma.LobbyFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload> | null
+          args: Prisma.GameSessionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.LobbyFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>
+          args: Prisma.GameSessionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>
         }
         findMany: {
-          args: Prisma.LobbyFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>[]
+          args: Prisma.GameSessionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>[]
         }
         create: {
-          args: Prisma.LobbyCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>
+          args: Prisma.GameSessionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>
         }
         createMany: {
-          args: Prisma.LobbyCreateManyArgs<ExtArgs>
+          args: Prisma.GameSessionCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.LobbyCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>[]
+          args: Prisma.GameSessionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>[]
         }
         delete: {
-          args: Prisma.LobbyDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>
+          args: Prisma.GameSessionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>
         }
         update: {
-          args: Prisma.LobbyUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>
+          args: Prisma.GameSessionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>
         }
         deleteMany: {
-          args: Prisma.LobbyDeleteManyArgs<ExtArgs>
+          args: Prisma.GameSessionDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.LobbyUpdateManyArgs<ExtArgs>
+          args: Prisma.GameSessionUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.LobbyUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>[]
+          args: Prisma.GameSessionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>[]
         }
         upsert: {
-          args: Prisma.LobbyUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LobbyPayload>
+          args: Prisma.GameSessionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>
         }
         aggregate: {
-          args: Prisma.LobbyAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateLobby>
+          args: Prisma.GameSessionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGameSession>
         }
         groupBy: {
-          args: Prisma.LobbyGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.LobbyGroupByOutputType>[]
+          args: Prisma.GameSessionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameSessionGroupByOutputType>[]
         }
         count: {
-          args: Prisma.LobbyCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.LobbyCountAggregateOutputType> | number
+          args: Prisma.GameSessionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameSessionCountAggregateOutputType> | number
+        }
+      }
+    }
+    SessionPlayer: {
+      payload: Prisma.$SessionPlayerPayload<ExtArgs>
+      fields: Prisma.SessionPlayerFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SessionPlayerFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPlayerPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SessionPlayerFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPlayerPayload>
+        }
+        findFirst: {
+          args: Prisma.SessionPlayerFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPlayerPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SessionPlayerFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPlayerPayload>
+        }
+        findMany: {
+          args: Prisma.SessionPlayerFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPlayerPayload>[]
+        }
+        create: {
+          args: Prisma.SessionPlayerCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPlayerPayload>
+        }
+        createMany: {
+          args: Prisma.SessionPlayerCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SessionPlayerCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPlayerPayload>[]
+        }
+        delete: {
+          args: Prisma.SessionPlayerDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPlayerPayload>
+        }
+        update: {
+          args: Prisma.SessionPlayerUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPlayerPayload>
+        }
+        deleteMany: {
+          args: Prisma.SessionPlayerDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SessionPlayerUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SessionPlayerUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPlayerPayload>[]
+        }
+        upsert: {
+          args: Prisma.SessionPlayerUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPlayerPayload>
+        }
+        aggregate: {
+          args: Prisma.SessionPlayerAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSessionPlayer>
+        }
+        groupBy: {
+          args: Prisma.SessionPlayerGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SessionPlayerGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SessionPlayerCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SessionPlayerCountAggregateOutputType> | number
         }
       }
     }
@@ -881,7 +956,7 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
-export const LobbyScalarFieldEnum = {
+export const GameSessionScalarFieldEnum = {
   id: 'id',
   sessionCode: 'sessionCode',
   sessionName: 'sessionName',
@@ -889,7 +964,18 @@ export const LobbyScalarFieldEnum = {
   genres: 'genres'
 } as const
 
-export type LobbyScalarFieldEnum = (typeof LobbyScalarFieldEnum)[keyof typeof LobbyScalarFieldEnum]
+export type GameSessionScalarFieldEnum = (typeof GameSessionScalarFieldEnum)[keyof typeof GameSessionScalarFieldEnum]
+
+
+export const SessionPlayerScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  gameSessionId: 'gameSessionId',
+  score: 'score',
+  joinedAt: 'joinedAt'
+} as const
+
+export type SessionPlayerScalarFieldEnum = (typeof SessionPlayerScalarFieldEnum)[keyof typeof SessionPlayerScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1075,7 +1161,8 @@ export type GlobalOmitConfig = {
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit
-  lobby?: Prisma.LobbyOmit
+  gameSession?: Prisma.GameSessionOmit
+  sessionPlayer?: Prisma.SessionPlayerOmit
 }
 
 /* Types for Logging */

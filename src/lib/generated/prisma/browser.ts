@@ -38,7 +38,12 @@ export type Account = Prisma.AccountModel
  */
 export type Verification = Prisma.VerificationModel
 /**
- * Model Lobby
+ * Model GameSession
  * 
  */
-export type Lobby = Prisma.LobbyModel
+export type GameSession = Prisma.GameSessionModel
+/**
+ * Model SessionPlayer
+ * 
+ */
+export type SessionPlayer = Prisma.SessionPlayerModel

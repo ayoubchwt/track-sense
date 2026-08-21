@@ -9,15 +9,16 @@ datasource db {
 }
 
 model User {
-  id            String    @id
-  name          String
-  email         String
-  emailVerified Boolean   @default(false)
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  sessions      Session[]
-  accounts      Account[]
+  id             String          @id
+  name           String
+  email          String
+  emailVerified  Boolean         @default(false)
+  image          String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  sessions       Session[]
+  accounts       Account[]
+  sessionPlayers SessionPlayer[]
 
   @@unique([email])
   @@map("user")
@@ -71,10 +72,27 @@ model Verification {
   @@map("verification")
 }
 
-model Lobby {
-  id          String @id @default(cuid())
-  sessionCode String @unique
-  sessionName String
-  rounds      Int
-  genres      String
+model GameSession {
+  id             String          @id @default(cuid())
+  sessionCode    String          @unique
+  sessionName    String
+  rounds         Int
+  genres         String
+  sessionPlayers SessionPlayer[]
+
+  @@map("gameSession")
+}
+
+model SessionPlayer {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  gameSessionId String
+  gameSession   GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
+  score         Int         @default(0)
+  joinedAt      DateTime    @default(now())
+
+  @@unique([userId, gameSessionId])
+  @@map("sessionPlayer")
 }
