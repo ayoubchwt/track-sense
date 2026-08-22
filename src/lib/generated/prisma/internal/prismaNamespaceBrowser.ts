@@ -136,7 +136,9 @@ export const GameSessionScalarFieldEnum = {
   sessionCode: 'sessionCode',
   sessionName: 'sessionName',
   rounds: 'rounds',
-  genres: 'genres'
+  genres: 'genres',
+  isAlive: 'isAlive',
+  ownerId: 'ownerId'
 } as const
 
 export type GameSessionScalarFieldEnum = (typeof GameSessionScalarFieldEnum)[keyof typeof GameSessionScalarFieldEnum]

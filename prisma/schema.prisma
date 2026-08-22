@@ -1,98 +1,102 @@
-generator client {
-  provider = "prisma-client"
-  output   = "../src/lib/generated/prisma"
-}
+  generator client {
+    provider = "prisma-client"
+    output   = "../src/lib/generated/prisma"
+  }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
+  datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+  }
 
-model User {
-  id             String          @id
-  name           String
-  email          String
-  emailVerified  Boolean         @default(false)
-  image          String?
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-  sessions       Session[]
-  accounts       Account[]
-  sessionPlayers SessionPlayer[]
+  model User {
+    id             String          @id
+    name           String
+    email          String
+    emailVerified  Boolean         @default(false)
+    image          String?
+    createdAt      DateTime        @default(now())
+    updatedAt      DateTime        @updatedAt
+    sessions       Session[]
+    accounts       Account[]
+    sessionPlayers SessionPlayer[]
+    gameSessions   GameSession[]
 
-  @@unique([email])
-  @@map("user")
-}
+    @@unique([email])
+    @@map("user")
+  }
 
-model Session {
-  id        String   @id
-  expiresAt DateTime
-  token     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  ipAddress String?
-  userAgent String?
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  model Session {
+    id        String   @id
+    expiresAt DateTime
+    token     String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    ipAddress String?
+    userAgent String?
+    userId    String
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([token])
-  @@index([userId])
-  @@map("session")
-}
+    @@unique([token])
+    @@index([userId])
+    @@map("session")
+  }
 
-model Account {
-  id                    String    @id
-  accountId             String
-  providerId            String
-  userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  accessToken           String?
-  refreshToken          String?
-  idToken               String?
-  accessTokenExpiresAt  DateTime?
-  refreshTokenExpiresAt DateTime?
-  scope                 String?
-  password              String?
-  createdAt             DateTime  @default(now())
-  updatedAt             DateTime  @updatedAt
+  model Account {
+    id                    String    @id
+    accountId             String
+    providerId            String
+    userId                String
+    user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    accessToken           String?
+    refreshToken          String?
+    idToken               String?
+    accessTokenExpiresAt  DateTime?
+    refreshTokenExpiresAt DateTime?
+    scope                 String?
+    password              String?
+    createdAt             DateTime  @default(now())
+    updatedAt             DateTime  @updatedAt
 
-  @@index([userId])
-  @@map("account")
-}
+    @@index([userId])
+    @@map("account")
+  }
 
-model Verification {
-  id         String   @id
-  identifier String
-  value      String
-  expiresAt  DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  model Verification {
+    id         String   @id
+    identifier String
+    value      String
+    expiresAt  DateTime
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
 
-  @@index([identifier])
-  @@map("verification")
-}
+    @@index([identifier])
+    @@map("verification")
+  }
 
-model GameSession {
-  id             String          @id @default(cuid())
-  sessionCode    String          @unique
-  sessionName    String
-  rounds         Int
-  genres         String
-  sessionPlayers SessionPlayer[]
+  model GameSession {
+    id             String          @id @default(cuid())
+    sessionCode    String          @unique
+    sessionName    String
+    rounds         Int
+    genres         String
+    isAlive        Boolean         @default(true)
+    ownerId        String
+    owner          User            @relation(fields: [ownerId], references: [id])
+    sessionPlayers SessionPlayer[]
 
-  @@map("gameSession")
-}
+    @@map("gameSession")
+  }
 
-model SessionPlayer {
-  id     String @id @default(cuid())
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  model SessionPlayer {
+    id     String @id @default(cuid())
+    userId String
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  gameSessionId String
-  gameSession   GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
-  score         Int         @default(0)
-  joinedAt      DateTime    @default(now())
+    gameSessionId String
+    gameSession   GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
+    score         Int         @default(0)
+    joinedAt      DateTime    @default(now())
 
-  @@unique([userId, gameSessionId])
-  @@map("sessionPlayer")
-}
+    @@unique([userId, gameSessionId])
+    @@map("sessionPlayer")
+  }

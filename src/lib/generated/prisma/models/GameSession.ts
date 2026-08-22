@@ -40,6 +40,8 @@ export type GameSessionMinAggregateOutputType = {
   sessionName: string | null
   rounds: number | null
   genres: string | null
+  isAlive: boolean | null
+  ownerId: string | null
 }
 
 export type GameSessionMaxAggregateOutputType = {
@@ -48,6 +50,8 @@ export type GameSessionMaxAggregateOutputType = {
   sessionName: string | null
   rounds: number | null
   genres: string | null
+  isAlive: boolean | null
+  ownerId: string | null
 }
 
 export type GameSessionCountAggregateOutputType = {
@@ -56,6 +60,8 @@ export type GameSessionCountAggregateOutputType = {
   sessionName: number
   rounds: number
   genres: number
+  isAlive: number
+  ownerId: number
   _all: number
 }
 
@@ -74,6 +80,8 @@ export type GameSessionMinAggregateInputType = {
   sessionName?: true
   rounds?: true
   genres?: true
+  isAlive?: true
+  ownerId?: true
 }
 
 export type GameSessionMaxAggregateInputType = {
@@ -82,6 +90,8 @@ export type GameSessionMaxAggregateInputType = {
   sessionName?: true
   rounds?: true
   genres?: true
+  isAlive?: true
+  ownerId?: true
 }
 
 export type GameSessionCountAggregateInputType = {
@@ -90,6 +100,8 @@ export type GameSessionCountAggregateInputType = {
   sessionName?: true
   rounds?: true
   genres?: true
+  isAlive?: true
+  ownerId?: true
   _all?: true
 }
 
@@ -185,6 +197,8 @@ export type GameSessionGroupByOutputType = {
   sessionName: string
   rounds: number
   genres: string
+  isAlive: boolean
+  ownerId: string
   _count: GameSessionCountAggregateOutputType | null
   _avg: GameSessionAvgAggregateOutputType | null
   _sum: GameSessionSumAggregateOutputType | null
@@ -216,6 +230,9 @@ export type GameSessionWhereInput = {
   sessionName?: Prisma.StringFilter<"GameSession"> | string
   rounds?: Prisma.IntFilter<"GameSession"> | number
   genres?: Prisma.StringFilter<"GameSession"> | string
+  isAlive?: Prisma.BoolFilter<"GameSession"> | boolean
+  ownerId?: Prisma.StringFilter<"GameSession"> | string
+  owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   sessionPlayers?: Prisma.SessionPlayerListRelationFilter
 }
 
@@ -225,6 +242,9 @@ export type GameSessionOrderByWithRelationInput = {
   sessionName?: Prisma.SortOrder
   rounds?: Prisma.SortOrder
   genres?: Prisma.SortOrder
+  isAlive?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
+  owner?: Prisma.UserOrderByWithRelationInput
   sessionPlayers?: Prisma.SessionPlayerOrderByRelationAggregateInput
 }
 
@@ -237,6 +257,9 @@ export type GameSessionWhereUniqueInput = Prisma.AtLeast<{
   sessionName?: Prisma.StringFilter<"GameSession"> | string
   rounds?: Prisma.IntFilter<"GameSession"> | number
   genres?: Prisma.StringFilter<"GameSession"> | string
+  isAlive?: Prisma.BoolFilter<"GameSession"> | boolean
+  ownerId?: Prisma.StringFilter<"GameSession"> | string
+  owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   sessionPlayers?: Prisma.SessionPlayerListRelationFilter
 }, "id" | "sessionCode">
 
@@ -246,6 +269,8 @@ export type GameSessionOrderByWithAggregationInput = {
   sessionName?: Prisma.SortOrder
   rounds?: Prisma.SortOrder
   genres?: Prisma.SortOrder
+  isAlive?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
   _count?: Prisma.GameSessionCountOrderByAggregateInput
   _avg?: Prisma.GameSessionAvgOrderByAggregateInput
   _max?: Prisma.GameSessionMaxOrderByAggregateInput
@@ -262,6 +287,8 @@ export type GameSessionScalarWhereWithAggregatesInput = {
   sessionName?: Prisma.StringWithAggregatesFilter<"GameSession"> | string
   rounds?: Prisma.IntWithAggregatesFilter<"GameSession"> | number
   genres?: Prisma.StringWithAggregatesFilter<"GameSession"> | string
+  isAlive?: Prisma.BoolWithAggregatesFilter<"GameSession"> | boolean
+  ownerId?: Prisma.StringWithAggregatesFilter<"GameSession"> | string
 }
 
 export type GameSessionCreateInput = {
@@ -270,6 +297,8 @@ export type GameSessionCreateInput = {
   sessionName: string
   rounds: number
   genres: string
+  isAlive?: boolean
+  owner: Prisma.UserCreateNestedOneWithoutGameSessionsInput
   sessionPlayers?: Prisma.SessionPlayerCreateNestedManyWithoutGameSessionInput
 }
 
@@ -279,6 +308,8 @@ export type GameSessionUncheckedCreateInput = {
   sessionName: string
   rounds: number
   genres: string
+  isAlive?: boolean
+  ownerId: string
   sessionPlayers?: Prisma.SessionPlayerUncheckedCreateNestedManyWithoutGameSessionInput
 }
 
@@ -288,6 +319,8 @@ export type GameSessionUpdateInput = {
   sessionName?: Prisma.StringFieldUpdateOperationsInput | string
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
+  isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  owner?: Prisma.UserUpdateOneRequiredWithoutGameSessionsNestedInput
   sessionPlayers?: Prisma.SessionPlayerUpdateManyWithoutGameSessionNestedInput
 }
 
@@ -297,6 +330,8 @@ export type GameSessionUncheckedUpdateInput = {
   sessionName?: Prisma.StringFieldUpdateOperationsInput | string
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
+  isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   sessionPlayers?: Prisma.SessionPlayerUncheckedUpdateManyWithoutGameSessionNestedInput
 }
 
@@ -306,6 +341,8 @@ export type GameSessionCreateManyInput = {
   sessionName: string
   rounds: number
   genres: string
+  isAlive?: boolean
+  ownerId: string
 }
 
 export type GameSessionUpdateManyMutationInput = {
@@ -314,6 +351,7 @@ export type GameSessionUpdateManyMutationInput = {
   sessionName?: Prisma.StringFieldUpdateOperationsInput | string
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
+  isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type GameSessionUncheckedUpdateManyInput = {
@@ -322,6 +360,18 @@ export type GameSessionUncheckedUpdateManyInput = {
   sessionName?: Prisma.StringFieldUpdateOperationsInput | string
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
+  isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type GameSessionListRelationFilter = {
+  every?: Prisma.GameSessionWhereInput
+  some?: Prisma.GameSessionWhereInput
+  none?: Prisma.GameSessionWhereInput
+}
+
+export type GameSessionOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type GameSessionCountOrderByAggregateInput = {
@@ -330,6 +380,8 @@ export type GameSessionCountOrderByAggregateInput = {
   sessionName?: Prisma.SortOrder
   rounds?: Prisma.SortOrder
   genres?: Prisma.SortOrder
+  isAlive?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
 }
 
 export type GameSessionAvgOrderByAggregateInput = {
@@ -342,6 +394,8 @@ export type GameSessionMaxOrderByAggregateInput = {
   sessionName?: Prisma.SortOrder
   rounds?: Prisma.SortOrder
   genres?: Prisma.SortOrder
+  isAlive?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
 }
 
 export type GameSessionMinOrderByAggregateInput = {
@@ -350,6 +404,8 @@ export type GameSessionMinOrderByAggregateInput = {
   sessionName?: Prisma.SortOrder
   rounds?: Prisma.SortOrder
   genres?: Prisma.SortOrder
+  isAlive?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
 }
 
 export type GameSessionSumOrderByAggregateInput = {
@@ -359,6 +415,48 @@ export type GameSessionSumOrderByAggregateInput = {
 export type GameSessionScalarRelationFilter = {
   is?: Prisma.GameSessionWhereInput
   isNot?: Prisma.GameSessionWhereInput
+}
+
+export type GameSessionCreateNestedManyWithoutOwnerInput = {
+  create?: Prisma.XOR<Prisma.GameSessionCreateWithoutOwnerInput, Prisma.GameSessionUncheckedCreateWithoutOwnerInput> | Prisma.GameSessionCreateWithoutOwnerInput[] | Prisma.GameSessionUncheckedCreateWithoutOwnerInput[]
+  connectOrCreate?: Prisma.GameSessionCreateOrConnectWithoutOwnerInput | Prisma.GameSessionCreateOrConnectWithoutOwnerInput[]
+  createMany?: Prisma.GameSessionCreateManyOwnerInputEnvelope
+  connect?: Prisma.GameSessionWhereUniqueInput | Prisma.GameSessionWhereUniqueInput[]
+}
+
+export type GameSessionUncheckedCreateNestedManyWithoutOwnerInput = {
+  create?: Prisma.XOR<Prisma.GameSessionCreateWithoutOwnerInput, Prisma.GameSessionUncheckedCreateWithoutOwnerInput> | Prisma.GameSessionCreateWithoutOwnerInput[] | Prisma.GameSessionUncheckedCreateWithoutOwnerInput[]
+  connectOrCreate?: Prisma.GameSessionCreateOrConnectWithoutOwnerInput | Prisma.GameSessionCreateOrConnectWithoutOwnerInput[]
+  createMany?: Prisma.GameSessionCreateManyOwnerInputEnvelope
+  connect?: Prisma.GameSessionWhereUniqueInput | Prisma.GameSessionWhereUniqueInput[]
+}
+
+export type GameSessionUpdateManyWithoutOwnerNestedInput = {
+  create?: Prisma.XOR<Prisma.GameSessionCreateWithoutOwnerInput, Prisma.GameSessionUncheckedCreateWithoutOwnerInput> | Prisma.GameSessionCreateWithoutOwnerInput[] | Prisma.GameSessionUncheckedCreateWithoutOwnerInput[]
+  connectOrCreate?: Prisma.GameSessionCreateOrConnectWithoutOwnerInput | Prisma.GameSessionCreateOrConnectWithoutOwnerInput[]
+  upsert?: Prisma.GameSessionUpsertWithWhereUniqueWithoutOwnerInput | Prisma.GameSessionUpsertWithWhereUniqueWithoutOwnerInput[]
+  createMany?: Prisma.GameSessionCreateManyOwnerInputEnvelope
+  set?: Prisma.GameSessionWhereUniqueInput | Prisma.GameSessionWhereUniqueInput[]
+  disconnect?: Prisma.GameSessionWhereUniqueInput | Prisma.GameSessionWhereUniqueInput[]
+  delete?: Prisma.GameSessionWhereUniqueInput | Prisma.GameSessionWhereUniqueInput[]
+  connect?: Prisma.GameSessionWhereUniqueInput | Prisma.GameSessionWhereUniqueInput[]
+  update?: Prisma.GameSessionUpdateWithWhereUniqueWithoutOwnerInput | Prisma.GameSessionUpdateWithWhereUniqueWithoutOwnerInput[]
+  updateMany?: Prisma.GameSessionUpdateManyWithWhereWithoutOwnerInput | Prisma.GameSessionUpdateManyWithWhereWithoutOwnerInput[]
+  deleteMany?: Prisma.GameSessionScalarWhereInput | Prisma.GameSessionScalarWhereInput[]
+}
+
+export type GameSessionUncheckedUpdateManyWithoutOwnerNestedInput = {
+  create?: Prisma.XOR<Prisma.GameSessionCreateWithoutOwnerInput, Prisma.GameSessionUncheckedCreateWithoutOwnerInput> | Prisma.GameSessionCreateWithoutOwnerInput[] | Prisma.GameSessionUncheckedCreateWithoutOwnerInput[]
+  connectOrCreate?: Prisma.GameSessionCreateOrConnectWithoutOwnerInput | Prisma.GameSessionCreateOrConnectWithoutOwnerInput[]
+  upsert?: Prisma.GameSessionUpsertWithWhereUniqueWithoutOwnerInput | Prisma.GameSessionUpsertWithWhereUniqueWithoutOwnerInput[]
+  createMany?: Prisma.GameSessionCreateManyOwnerInputEnvelope
+  set?: Prisma.GameSessionWhereUniqueInput | Prisma.GameSessionWhereUniqueInput[]
+  disconnect?: Prisma.GameSessionWhereUniqueInput | Prisma.GameSessionWhereUniqueInput[]
+  delete?: Prisma.GameSessionWhereUniqueInput | Prisma.GameSessionWhereUniqueInput[]
+  connect?: Prisma.GameSessionWhereUniqueInput | Prisma.GameSessionWhereUniqueInput[]
+  update?: Prisma.GameSessionUpdateWithWhereUniqueWithoutOwnerInput | Prisma.GameSessionUpdateWithWhereUniqueWithoutOwnerInput[]
+  updateMany?: Prisma.GameSessionUpdateManyWithWhereWithoutOwnerInput | Prisma.GameSessionUpdateManyWithWhereWithoutOwnerInput[]
+  deleteMany?: Prisma.GameSessionScalarWhereInput | Prisma.GameSessionScalarWhereInput[]
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -383,12 +481,73 @@ export type GameSessionUpdateOneRequiredWithoutSessionPlayersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.GameSessionUpdateToOneWithWhereWithoutSessionPlayersInput, Prisma.GameSessionUpdateWithoutSessionPlayersInput>, Prisma.GameSessionUncheckedUpdateWithoutSessionPlayersInput>
 }
 
+export type GameSessionCreateWithoutOwnerInput = {
+  id?: string
+  sessionCode: string
+  sessionName: string
+  rounds: number
+  genres: string
+  isAlive?: boolean
+  sessionPlayers?: Prisma.SessionPlayerCreateNestedManyWithoutGameSessionInput
+}
+
+export type GameSessionUncheckedCreateWithoutOwnerInput = {
+  id?: string
+  sessionCode: string
+  sessionName: string
+  rounds: number
+  genres: string
+  isAlive?: boolean
+  sessionPlayers?: Prisma.SessionPlayerUncheckedCreateNestedManyWithoutGameSessionInput
+}
+
+export type GameSessionCreateOrConnectWithoutOwnerInput = {
+  where: Prisma.GameSessionWhereUniqueInput
+  create: Prisma.XOR<Prisma.GameSessionCreateWithoutOwnerInput, Prisma.GameSessionUncheckedCreateWithoutOwnerInput>
+}
+
+export type GameSessionCreateManyOwnerInputEnvelope = {
+  data: Prisma.GameSessionCreateManyOwnerInput | Prisma.GameSessionCreateManyOwnerInput[]
+  skipDuplicates?: boolean
+}
+
+export type GameSessionUpsertWithWhereUniqueWithoutOwnerInput = {
+  where: Prisma.GameSessionWhereUniqueInput
+  update: Prisma.XOR<Prisma.GameSessionUpdateWithoutOwnerInput, Prisma.GameSessionUncheckedUpdateWithoutOwnerInput>
+  create: Prisma.XOR<Prisma.GameSessionCreateWithoutOwnerInput, Prisma.GameSessionUncheckedCreateWithoutOwnerInput>
+}
+
+export type GameSessionUpdateWithWhereUniqueWithoutOwnerInput = {
+  where: Prisma.GameSessionWhereUniqueInput
+  data: Prisma.XOR<Prisma.GameSessionUpdateWithoutOwnerInput, Prisma.GameSessionUncheckedUpdateWithoutOwnerInput>
+}
+
+export type GameSessionUpdateManyWithWhereWithoutOwnerInput = {
+  where: Prisma.GameSessionScalarWhereInput
+  data: Prisma.XOR<Prisma.GameSessionUpdateManyMutationInput, Prisma.GameSessionUncheckedUpdateManyWithoutOwnerInput>
+}
+
+export type GameSessionScalarWhereInput = {
+  AND?: Prisma.GameSessionScalarWhereInput | Prisma.GameSessionScalarWhereInput[]
+  OR?: Prisma.GameSessionScalarWhereInput[]
+  NOT?: Prisma.GameSessionScalarWhereInput | Prisma.GameSessionScalarWhereInput[]
+  id?: Prisma.StringFilter<"GameSession"> | string
+  sessionCode?: Prisma.StringFilter<"GameSession"> | string
+  sessionName?: Prisma.StringFilter<"GameSession"> | string
+  rounds?: Prisma.IntFilter<"GameSession"> | number
+  genres?: Prisma.StringFilter<"GameSession"> | string
+  isAlive?: Prisma.BoolFilter<"GameSession"> | boolean
+  ownerId?: Prisma.StringFilter<"GameSession"> | string
+}
+
 export type GameSessionCreateWithoutSessionPlayersInput = {
   id?: string
   sessionCode: string
   sessionName: string
   rounds: number
   genres: string
+  isAlive?: boolean
+  owner: Prisma.UserCreateNestedOneWithoutGameSessionsInput
 }
 
 export type GameSessionUncheckedCreateWithoutSessionPlayersInput = {
@@ -397,6 +556,8 @@ export type GameSessionUncheckedCreateWithoutSessionPlayersInput = {
   sessionName: string
   rounds: number
   genres: string
+  isAlive?: boolean
+  ownerId: string
 }
 
 export type GameSessionCreateOrConnectWithoutSessionPlayersInput = {
@@ -421,6 +582,8 @@ export type GameSessionUpdateWithoutSessionPlayersInput = {
   sessionName?: Prisma.StringFieldUpdateOperationsInput | string
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
+  isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  owner?: Prisma.UserUpdateOneRequiredWithoutGameSessionsNestedInput
 }
 
 export type GameSessionUncheckedUpdateWithoutSessionPlayersInput = {
@@ -429,6 +592,46 @@ export type GameSessionUncheckedUpdateWithoutSessionPlayersInput = {
   sessionName?: Prisma.StringFieldUpdateOperationsInput | string
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
+  isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type GameSessionCreateManyOwnerInput = {
+  id?: string
+  sessionCode: string
+  sessionName: string
+  rounds: number
+  genres: string
+  isAlive?: boolean
+}
+
+export type GameSessionUpdateWithoutOwnerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  sessionCode?: Prisma.StringFieldUpdateOperationsInput | string
+  sessionName?: Prisma.StringFieldUpdateOperationsInput | string
+  rounds?: Prisma.IntFieldUpdateOperationsInput | number
+  genres?: Prisma.StringFieldUpdateOperationsInput | string
+  isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sessionPlayers?: Prisma.SessionPlayerUpdateManyWithoutGameSessionNestedInput
+}
+
+export type GameSessionUncheckedUpdateWithoutOwnerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  sessionCode?: Prisma.StringFieldUpdateOperationsInput | string
+  sessionName?: Prisma.StringFieldUpdateOperationsInput | string
+  rounds?: Prisma.IntFieldUpdateOperationsInput | number
+  genres?: Prisma.StringFieldUpdateOperationsInput | string
+  isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sessionPlayers?: Prisma.SessionPlayerUncheckedUpdateManyWithoutGameSessionNestedInput
+}
+
+export type GameSessionUncheckedUpdateManyWithoutOwnerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  sessionCode?: Prisma.StringFieldUpdateOperationsInput | string
+  sessionName?: Prisma.StringFieldUpdateOperationsInput | string
+  rounds?: Prisma.IntFieldUpdateOperationsInput | number
+  genres?: Prisma.StringFieldUpdateOperationsInput | string
+  isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -468,6 +671,9 @@ export type GameSessionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   sessionName?: boolean
   rounds?: boolean
   genres?: boolean
+  isAlive?: boolean
+  ownerId?: boolean
+  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   sessionPlayers?: boolean | Prisma.GameSession$sessionPlayersArgs<ExtArgs>
   _count?: boolean | Prisma.GameSessionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["gameSession"]>
@@ -478,6 +684,9 @@ export type GameSessionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   sessionName?: boolean
   rounds?: boolean
   genres?: boolean
+  isAlive?: boolean
+  ownerId?: boolean
+  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["gameSession"]>
 
 export type GameSessionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -486,6 +695,9 @@ export type GameSessionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   sessionName?: boolean
   rounds?: boolean
   genres?: boolean
+  isAlive?: boolean
+  ownerId?: boolean
+  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["gameSession"]>
 
 export type GameSessionSelectScalar = {
@@ -494,19 +706,27 @@ export type GameSessionSelectScalar = {
   sessionName?: boolean
   rounds?: boolean
   genres?: boolean
+  isAlive?: boolean
+  ownerId?: boolean
 }
 
-export type GameSessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sessionCode" | "sessionName" | "rounds" | "genres", ExtArgs["result"]["gameSession"]>
+export type GameSessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sessionCode" | "sessionName" | "rounds" | "genres" | "isAlive" | "ownerId", ExtArgs["result"]["gameSession"]>
 export type GameSessionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   sessionPlayers?: boolean | Prisma.GameSession$sessionPlayersArgs<ExtArgs>
   _count?: boolean | Prisma.GameSessionCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type GameSessionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type GameSessionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type GameSessionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type GameSessionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
 
 export type $GameSessionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "GameSession"
   objects: {
+    owner: Prisma.$UserPayload<ExtArgs>
     sessionPlayers: Prisma.$SessionPlayerPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -515,6 +735,8 @@ export type $GameSessionPayload<ExtArgs extends runtime.Types.Extensions.Interna
     sessionName: string
     rounds: number
     genres: string
+    isAlive: boolean
+    ownerId: string
   }, ExtArgs["result"]["gameSession"]>
   composites: {}
 }
@@ -909,6 +1131,7 @@ readonly fields: GameSessionFieldRefs;
  */
 export interface Prisma__GameSessionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  owner<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   sessionPlayers<T extends Prisma.GameSession$sessionPlayersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GameSession$sessionPlayersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPlayerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -944,6 +1167,8 @@ export interface GameSessionFieldRefs {
   readonly sessionName: Prisma.FieldRef<"GameSession", 'String'>
   readonly rounds: Prisma.FieldRef<"GameSession", 'Int'>
   readonly genres: Prisma.FieldRef<"GameSession", 'String'>
+  readonly isAlive: Prisma.FieldRef<"GameSession", 'Boolean'>
+  readonly ownerId: Prisma.FieldRef<"GameSession", 'String'>
 }
     
 
@@ -1193,6 +1418,10 @@ export type GameSessionCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    */
   data: Prisma.GameSessionCreateManyInput | Prisma.GameSessionCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GameSessionIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1263,6 +1492,10 @@ export type GameSessionUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * Limit how many GameSessions to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GameSessionIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
