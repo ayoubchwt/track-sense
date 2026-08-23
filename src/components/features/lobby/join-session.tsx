@@ -29,6 +29,7 @@ function JoinSession() {
   });
   const joinSession = async (data: JoinSession) => {
     setIsLoading(true);
+    setServerError(null);
     const response = await joinSessionAction(data);
     if (response.success) {
       setIsLoading(false);
@@ -67,8 +68,9 @@ function JoinSession() {
           )}
         />
         {errors.sessionCode?.message && (
-          <ErrorText> {errors.sessionCode.message}</ErrorText>
+          <ErrorText>{errors.sessionCode.message}</ErrorText>
         )}
+        {serverError && <ErrorText>{serverError}</ErrorText>}
         <Button variant="optional" className="border border-(--border-dark)">
           {isLoading ? (
             <Spinner
@@ -79,7 +81,6 @@ function JoinSession() {
             <>Join Session</>
           )}
         </Button>
-        {serverError && <ErrorText>{serverError}</ErrorText>}
       </form>
       <RoomList></RoomList>
     </div>

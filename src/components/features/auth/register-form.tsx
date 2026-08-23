@@ -102,7 +102,7 @@ function RegisterForm() {
           <>Create account</>
         )}
       </Button>
-      {serverError && <ErrorBanner message={serverError}></ErrorBanner>}
+      {serverError && <ErrorBanner>{serverError}</ErrorBanner>}
       <div className="flex items-center justify-center gap-1">
         <Label className="text-sm">Already playing ?</Label>
         <Ref className="text-(--text) underline">Log in</Ref>

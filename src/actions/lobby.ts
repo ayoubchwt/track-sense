@@ -1,6 +1,8 @@
 "use server";
 import { getUser } from "@/lib/auth/utils";
 import db from "@/lib/db";
+import { Prisma } from "@/lib/generated/prisma/client";
+import { PRISMA_ERRORS } from "@/lib/utils/prisma-utils";
 import {
   createSessionSchema,
   JoingSessionSchema,
@@ -46,16 +48,14 @@ export async function createSessionAction(data: CreateSession) {
 
 export async function joinSessionAction(data: JoinSession) {
   const user = await getUser();
-  if (!user) return { success: false, error: "No authenticed has been done" };
+  if (!user) return { success: false, error: "Authentication required." };
   const validated = JoingSessionSchema.safeParse(data);
-  if (!validated.success) {
+  if (!validated.success)
     return { success: false, error: "Invalid form provided data." };
-  }
-  const { sessionCode } = validated.data;
   try {
     const gameSession = await db.gameSession.findUnique({
       where: {
-        sessionCode: sessionCode,
+        sessionCode: validated.data.sessionCode,
       },
     });
     if (!gameSession)
@@ -73,9 +73,13 @@ export async function joinSessionAction(data: JoinSession) {
     });
     return { success: true, data: sessionPlayer };
   } catch (error) {
-    console.log("Error", error);
-    return { success: false, error: `Failed to joing session ${error}` };
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === PRISMA_ERRORS.UNIQUE_CONSTRAINT
+    )
+      return { success: false, error: "You are already in this session." };
   }
+  return { sucess: false, error: "Failed to join the session" };
 }
 
 export async function endSessionAction() {
