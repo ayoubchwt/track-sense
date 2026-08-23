@@ -8,7 +8,15 @@ import { Controller, useForm } from "react-hook-form";
 import { type JoinSession } from "@/types/lobby";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { JoingSessionSchema } from "@/lib/validations/lobby";
+import ErrorText from "@/components/ui/error-text";
+import { useState } from "react";
+import { joinSessionAction } from "@/actions/lobby";
+import { useRouter } from "next/navigation";
+import Spinner from "@/components/ui/spinner";
 function JoinSession() {
+  const [isLoading, setIsLoading] = useState<boolean | null>(null);
+  const [serverError, setServerError] = useState<string | null>(null);
+  const router = useRouter();
   const {
     handleSubmit,
     control,
@@ -19,8 +27,16 @@ function JoinSession() {
       sessionCode: "",
     },
   });
-  const joinSession = (data: JoinSession) => {
-    console.log("join session informations : ", data);
+  const joinSession = async (data: JoinSession) => {
+    setIsLoading(true);
+    const response = await joinSessionAction(data);
+    if (response.success) {
+      setIsLoading(false);
+      router.push("/play");
+    } else {
+      setIsLoading(false);
+      setServerError(response.error || "Server Error");
+    }
   };
   return (
     <div className="flex flex-col w-full gap-10">
@@ -51,13 +67,19 @@ function JoinSession() {
           )}
         />
         {errors.sessionCode?.message && (
-          <p className="text-xs text-(--error) font-light min-h-2">
-            {errors.sessionCode.message}
-          </p>
+          <ErrorText> {errors.sessionCode.message}</ErrorText>
         )}
         <Button variant="optional" className="border border-(--border-dark)">
-          Join Session
+          {isLoading ? (
+            <Spinner
+              size="sm"
+              className="border-t-(--text-light) border-l-(--text-light)"
+            ></Spinner>
+          ) : (
+            <>Join Session</>
+          )}
         </Button>
+        {serverError && <ErrorText>{serverError}</ErrorText>}
       </form>
       <RoomList></RoomList>
     </div>

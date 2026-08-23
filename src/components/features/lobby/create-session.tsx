@@ -4,16 +4,21 @@ import GenreSelector from "./genre-selector";
 import Button from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import { useForm, Controller, useWatch } from "react-hook-form";
-// import { useState } from "react";
 import FormField from "@/components/ui/form-field";
 import { type CreateSession } from "@/types/lobby";
 import { generateCode } from "@/lib/utils/helpers";
 import { createSessionSchema } from "@/lib/validations/lobby";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { createSessionAction } from "@/actions/lobby";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Spinner from "@/components/ui/spinner";
+import ErrorText from "@/components/ui/error-text";
 
 function CreateSession() {
-  // const [serverError, setServerError] = useState<string | null>(null);
-  // const [isLoading, setIsLoading] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const {
     register,
     control,
@@ -31,9 +36,16 @@ function CreateSession() {
     control: control,
     name: "sessionCode",
   });
-  const createSession = (data: CreateSession) => {
-    console.log("Create Session data :", data);
-    console.log("Errors", errors);
+  const createSession = async (data: CreateSession) => {
+    setIsLoading(true);
+    const response = await createSessionAction(data);
+    if (response.success) {
+      setIsLoading(false);
+      router.push("/play");
+    } else {
+      setIsLoading(false);
+      setServerError(response.error || "Server Error");
+    }
   };
   return (
     <form
@@ -85,7 +97,17 @@ function CreateSession() {
           </Button>
         </div>
       </div>
-      <Button variant="primary">Launch Session</Button>
+      <Button variant="primary">
+        {isLoading ? (
+          <Spinner
+            size="sm"
+            className="border-t-(--bg) border-l-(--bg)"
+          ></Spinner>
+        ) : (
+          <>Launch Session</>
+        )}
+      </Button>
+      {serverError && <ErrorText>{serverError}</ErrorText>}
     </form>
   );
 }

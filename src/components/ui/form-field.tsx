@@ -1,3 +1,4 @@
+import ErrorText from "./error-text";
 import Input from "./input";
 interface FormFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
@@ -6,9 +7,7 @@ function FormField({ error, ...props }: FormFieldProps) {
   return (
     <div className="flex flex-col w-full gap-1">
       <Input {...props}></Input>
-      {error && (
-        <p className="text-xs text-(--error) font-light min-h-2">{error}</p>
-      )}
+      {error && <ErrorText>{error}</ErrorText>}
     </div>
   );
 }

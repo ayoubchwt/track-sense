@@ -7,7 +7,7 @@ import {
 } from "@/lib/validations/lobby";
 import { type CreateSession, type JoinSession } from "@/types/lobby";
 
-export async function createSession(data: CreateSession) {
+export async function createSessionAction(data: CreateSession) {
   const user = await getUser();
   if (!user)
     return {
@@ -16,7 +16,7 @@ export async function createSession(data: CreateSession) {
     };
   const validated = createSessionSchema.safeParse(data);
   if (!validated.success) {
-    return { success: false, error: "Invlide form data provided." };
+    return { success: false, error: "Invalid form data provided." };
   }
   const { sessionName, sessionCode, rounds, genres } = validated.data;
   try {
@@ -27,6 +27,14 @@ export async function createSession(data: CreateSession) {
         rounds: rounds,
         genres: genres,
         ownerId: user.id,
+        sessionPlayers: {
+          create: {
+            userId: user.id,
+          },
+        },
+      },
+      include: {
+        sessionPlayers: true,
       },
     });
     return { success: true, data: gameSession };
@@ -36,7 +44,7 @@ export async function createSession(data: CreateSession) {
   }
 }
 
-export async function joinSession(data: JoinSession) {
+export async function joinSessionAction(data: JoinSession) {
   const user = await getUser();
   if (!user) return { success: false, error: "No authenticed has been done" };
   const validated = JoingSessionSchema.safeParse(data);
@@ -70,7 +78,7 @@ export async function joinSession(data: JoinSession) {
   }
 }
 
-export async function endSession() {
+export async function endSessionAction() {
   const user = await getUser();
   if (!user)
     return {
