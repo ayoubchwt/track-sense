@@ -4,6 +4,9 @@ import Button from "../ui/button";
 import Ref from "../ui/ref";
 import Logo from "../ui/logo";
 import { useRouter } from "next/navigation";
+import ProtectedComponent from "../features/auth/protected-component";
+import UserMenu from "../features/auth/user-menu";
+import AuthActions from "../features/auth/auth-actions";
 
 function Navabar() {
   const router = useRouter();
@@ -18,8 +21,9 @@ function Navabar() {
         <Button variant="optional">
           <Moon className="w-4 h-4" />
         </Button>
-        <Button variant="secondary">Log in</Button>
-        <Button variant="primary">Sign up</Button>
+        <ProtectedComponent fallback={<AuthActions />}>
+          <UserMenu></UserMenu>
+        </ProtectedComponent>
       </div>
     </div>
   );
