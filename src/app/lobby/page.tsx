@@ -1,12 +1,12 @@
 "use client";
-import ProtectedRoute from "@/components/features/auth/protected-route";
+import GuardRoute from "@/components/features/auth/guard-route";
 import CreateSession from "@/components/features/lobby/create-session";
 import JoinSession from "@/components/features/lobby/join-session";
 import LobbyHeader from "@/components/features/lobby/lobby-header";
 
 function Lobby() {
   return (
-    <ProtectedRoute redirectTo={"/auth/login"}>
+    <GuardRoute isProtected={true} redirectTo={"/auth/login"}>
       <div className="flex flex-col justify-center items-center flex-1">
         <div className="flex flex-col gap-5 items-start max-w-5xl mx-auto w-full ">
           <LobbyHeader></LobbyHeader>
@@ -16,7 +16,7 @@ function Lobby() {
           </div>
         </div>
       </div>
-    </ProtectedRoute>
+    </GuardRoute>
   );
 }
 export default Lobby;
