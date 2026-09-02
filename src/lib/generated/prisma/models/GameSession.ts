@@ -38,6 +38,7 @@ export type GameSessionMinAggregateOutputType = {
   id: string | null
   sessionCode: string | null
   sessionName: string | null
+  isPublic: boolean | null
   rounds: number | null
   genres: string | null
   isAlive: boolean | null
@@ -48,6 +49,7 @@ export type GameSessionMaxAggregateOutputType = {
   id: string | null
   sessionCode: string | null
   sessionName: string | null
+  isPublic: boolean | null
   rounds: number | null
   genres: string | null
   isAlive: boolean | null
@@ -58,6 +60,7 @@ export type GameSessionCountAggregateOutputType = {
   id: number
   sessionCode: number
   sessionName: number
+  isPublic: number
   rounds: number
   genres: number
   isAlive: number
@@ -78,6 +81,7 @@ export type GameSessionMinAggregateInputType = {
   id?: true
   sessionCode?: true
   sessionName?: true
+  isPublic?: true
   rounds?: true
   genres?: true
   isAlive?: true
@@ -88,6 +92,7 @@ export type GameSessionMaxAggregateInputType = {
   id?: true
   sessionCode?: true
   sessionName?: true
+  isPublic?: true
   rounds?: true
   genres?: true
   isAlive?: true
@@ -98,6 +103,7 @@ export type GameSessionCountAggregateInputType = {
   id?: true
   sessionCode?: true
   sessionName?: true
+  isPublic?: true
   rounds?: true
   genres?: true
   isAlive?: true
@@ -195,6 +201,7 @@ export type GameSessionGroupByOutputType = {
   id: string
   sessionCode: string
   sessionName: string
+  isPublic: boolean
   rounds: number
   genres: string
   isAlive: boolean
@@ -228,6 +235,7 @@ export type GameSessionWhereInput = {
   id?: Prisma.StringFilter<"GameSession"> | string
   sessionCode?: Prisma.StringFilter<"GameSession"> | string
   sessionName?: Prisma.StringFilter<"GameSession"> | string
+  isPublic?: Prisma.BoolFilter<"GameSession"> | boolean
   rounds?: Prisma.IntFilter<"GameSession"> | number
   genres?: Prisma.StringFilter<"GameSession"> | string
   isAlive?: Prisma.BoolFilter<"GameSession"> | boolean
@@ -240,6 +248,7 @@ export type GameSessionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   sessionCode?: Prisma.SortOrder
   sessionName?: Prisma.SortOrder
+  isPublic?: Prisma.SortOrder
   rounds?: Prisma.SortOrder
   genres?: Prisma.SortOrder
   isAlive?: Prisma.SortOrder
@@ -255,6 +264,7 @@ export type GameSessionWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.GameSessionWhereInput[]
   NOT?: Prisma.GameSessionWhereInput | Prisma.GameSessionWhereInput[]
   sessionName?: Prisma.StringFilter<"GameSession"> | string
+  isPublic?: Prisma.BoolFilter<"GameSession"> | boolean
   rounds?: Prisma.IntFilter<"GameSession"> | number
   genres?: Prisma.StringFilter<"GameSession"> | string
   isAlive?: Prisma.BoolFilter<"GameSession"> | boolean
@@ -267,6 +277,7 @@ export type GameSessionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   sessionCode?: Prisma.SortOrder
   sessionName?: Prisma.SortOrder
+  isPublic?: Prisma.SortOrder
   rounds?: Prisma.SortOrder
   genres?: Prisma.SortOrder
   isAlive?: Prisma.SortOrder
@@ -285,6 +296,7 @@ export type GameSessionScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"GameSession"> | string
   sessionCode?: Prisma.StringWithAggregatesFilter<"GameSession"> | string
   sessionName?: Prisma.StringWithAggregatesFilter<"GameSession"> | string
+  isPublic?: Prisma.BoolWithAggregatesFilter<"GameSession"> | boolean
   rounds?: Prisma.IntWithAggregatesFilter<"GameSession"> | number
   genres?: Prisma.StringWithAggregatesFilter<"GameSession"> | string
   isAlive?: Prisma.BoolWithAggregatesFilter<"GameSession"> | boolean
@@ -295,6 +307,7 @@ export type GameSessionCreateInput = {
   id?: string
   sessionCode: string
   sessionName: string
+  isPublic: boolean
   rounds: number
   genres: string
   isAlive?: boolean
@@ -306,6 +319,7 @@ export type GameSessionUncheckedCreateInput = {
   id?: string
   sessionCode: string
   sessionName: string
+  isPublic: boolean
   rounds: number
   genres: string
   isAlive?: boolean
@@ -317,6 +331,7 @@ export type GameSessionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionCode?: Prisma.StringFieldUpdateOperationsInput | string
   sessionName?: Prisma.StringFieldUpdateOperationsInput | string
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -328,6 +343,7 @@ export type GameSessionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionCode?: Prisma.StringFieldUpdateOperationsInput | string
   sessionName?: Prisma.StringFieldUpdateOperationsInput | string
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -339,6 +355,7 @@ export type GameSessionCreateManyInput = {
   id?: string
   sessionCode: string
   sessionName: string
+  isPublic: boolean
   rounds: number
   genres: string
   isAlive?: boolean
@@ -349,6 +366,7 @@ export type GameSessionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionCode?: Prisma.StringFieldUpdateOperationsInput | string
   sessionName?: Prisma.StringFieldUpdateOperationsInput | string
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -358,6 +376,7 @@ export type GameSessionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionCode?: Prisma.StringFieldUpdateOperationsInput | string
   sessionName?: Prisma.StringFieldUpdateOperationsInput | string
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -378,6 +397,7 @@ export type GameSessionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   sessionCode?: Prisma.SortOrder
   sessionName?: Prisma.SortOrder
+  isPublic?: Prisma.SortOrder
   rounds?: Prisma.SortOrder
   genres?: Prisma.SortOrder
   isAlive?: Prisma.SortOrder
@@ -392,6 +412,7 @@ export type GameSessionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   sessionCode?: Prisma.SortOrder
   sessionName?: Prisma.SortOrder
+  isPublic?: Prisma.SortOrder
   rounds?: Prisma.SortOrder
   genres?: Prisma.SortOrder
   isAlive?: Prisma.SortOrder
@@ -402,6 +423,7 @@ export type GameSessionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   sessionCode?: Prisma.SortOrder
   sessionName?: Prisma.SortOrder
+  isPublic?: Prisma.SortOrder
   rounds?: Prisma.SortOrder
   genres?: Prisma.SortOrder
   isAlive?: Prisma.SortOrder
@@ -485,6 +507,7 @@ export type GameSessionCreateWithoutOwnerInput = {
   id?: string
   sessionCode: string
   sessionName: string
+  isPublic: boolean
   rounds: number
   genres: string
   isAlive?: boolean
@@ -495,6 +518,7 @@ export type GameSessionUncheckedCreateWithoutOwnerInput = {
   id?: string
   sessionCode: string
   sessionName: string
+  isPublic: boolean
   rounds: number
   genres: string
   isAlive?: boolean
@@ -534,6 +558,7 @@ export type GameSessionScalarWhereInput = {
   id?: Prisma.StringFilter<"GameSession"> | string
   sessionCode?: Prisma.StringFilter<"GameSession"> | string
   sessionName?: Prisma.StringFilter<"GameSession"> | string
+  isPublic?: Prisma.BoolFilter<"GameSession"> | boolean
   rounds?: Prisma.IntFilter<"GameSession"> | number
   genres?: Prisma.StringFilter<"GameSession"> | string
   isAlive?: Prisma.BoolFilter<"GameSession"> | boolean
@@ -544,6 +569,7 @@ export type GameSessionCreateWithoutSessionPlayersInput = {
   id?: string
   sessionCode: string
   sessionName: string
+  isPublic: boolean
   rounds: number
   genres: string
   isAlive?: boolean
@@ -554,6 +580,7 @@ export type GameSessionUncheckedCreateWithoutSessionPlayersInput = {
   id?: string
   sessionCode: string
   sessionName: string
+  isPublic: boolean
   rounds: number
   genres: string
   isAlive?: boolean
@@ -580,6 +607,7 @@ export type GameSessionUpdateWithoutSessionPlayersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionCode?: Prisma.StringFieldUpdateOperationsInput | string
   sessionName?: Prisma.StringFieldUpdateOperationsInput | string
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -590,6 +618,7 @@ export type GameSessionUncheckedUpdateWithoutSessionPlayersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionCode?: Prisma.StringFieldUpdateOperationsInput | string
   sessionName?: Prisma.StringFieldUpdateOperationsInput | string
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -600,6 +629,7 @@ export type GameSessionCreateManyOwnerInput = {
   id?: string
   sessionCode: string
   sessionName: string
+  isPublic: boolean
   rounds: number
   genres: string
   isAlive?: boolean
@@ -609,6 +639,7 @@ export type GameSessionUpdateWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionCode?: Prisma.StringFieldUpdateOperationsInput | string
   sessionName?: Prisma.StringFieldUpdateOperationsInput | string
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -619,6 +650,7 @@ export type GameSessionUncheckedUpdateWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionCode?: Prisma.StringFieldUpdateOperationsInput | string
   sessionName?: Prisma.StringFieldUpdateOperationsInput | string
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -629,6 +661,7 @@ export type GameSessionUncheckedUpdateManyWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionCode?: Prisma.StringFieldUpdateOperationsInput | string
   sessionName?: Prisma.StringFieldUpdateOperationsInput | string
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -669,6 +702,7 @@ export type GameSessionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   id?: boolean
   sessionCode?: boolean
   sessionName?: boolean
+  isPublic?: boolean
   rounds?: boolean
   genres?: boolean
   isAlive?: boolean
@@ -682,6 +716,7 @@ export type GameSessionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   sessionCode?: boolean
   sessionName?: boolean
+  isPublic?: boolean
   rounds?: boolean
   genres?: boolean
   isAlive?: boolean
@@ -693,6 +728,7 @@ export type GameSessionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   sessionCode?: boolean
   sessionName?: boolean
+  isPublic?: boolean
   rounds?: boolean
   genres?: boolean
   isAlive?: boolean
@@ -704,13 +740,14 @@ export type GameSessionSelectScalar = {
   id?: boolean
   sessionCode?: boolean
   sessionName?: boolean
+  isPublic?: boolean
   rounds?: boolean
   genres?: boolean
   isAlive?: boolean
   ownerId?: boolean
 }
 
-export type GameSessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sessionCode" | "sessionName" | "rounds" | "genres" | "isAlive" | "ownerId", ExtArgs["result"]["gameSession"]>
+export type GameSessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sessionCode" | "sessionName" | "isPublic" | "rounds" | "genres" | "isAlive" | "ownerId", ExtArgs["result"]["gameSession"]>
 export type GameSessionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   sessionPlayers?: boolean | Prisma.GameSession$sessionPlayersArgs<ExtArgs>
@@ -733,6 +770,7 @@ export type $GameSessionPayload<ExtArgs extends runtime.Types.Extensions.Interna
     id: string
     sessionCode: string
     sessionName: string
+    isPublic: boolean
     rounds: number
     genres: string
     isAlive: boolean
@@ -1165,6 +1203,7 @@ export interface GameSessionFieldRefs {
   readonly id: Prisma.FieldRef<"GameSession", 'String'>
   readonly sessionCode: Prisma.FieldRef<"GameSession", 'String'>
   readonly sessionName: Prisma.FieldRef<"GameSession", 'String'>
+  readonly isPublic: Prisma.FieldRef<"GameSession", 'Boolean'>
   readonly rounds: Prisma.FieldRef<"GameSession", 'Int'>
   readonly genres: Prisma.FieldRef<"GameSession", 'String'>
   readonly isAlive: Prisma.FieldRef<"GameSession", 'Boolean'>

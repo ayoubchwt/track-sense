@@ -960,6 +960,7 @@ export const GameSessionScalarFieldEnum = {
   id: 'id',
   sessionCode: 'sessionCode',
   sessionName: 'sessionName',
+  isPublic: 'isPublic',
   rounds: 'rounds',
   genres: 'genres',
   isAlive: 'isAlive',

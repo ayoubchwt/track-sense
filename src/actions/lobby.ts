@@ -20,7 +20,7 @@ export async function createSessionAction(data: CreateSession) {
   if (!validated.success) {
     return { success: false, error: "Invalid form data provided." };
   }
-  const { sessionName, sessionCode, rounds, genres } = validated.data;
+  const { sessionName, sessionCode, rounds, genres, isPublic } = validated.data;
   try {
     const gameSession = await db.gameSession.create({
       data: {
@@ -28,6 +28,7 @@ export async function createSessionAction(data: CreateSession) {
         sessionCode: sessionCode,
         rounds: rounds,
         genres: genres,
+        isPublic: isPublic,
         ownerId: user.id,
         sessionPlayers: {
           create: {
@@ -46,18 +47,29 @@ export async function createSessionAction(data: CreateSession) {
   }
 }
 
-export async function joinSessionAction(data: JoinSession) {
+export async function joinPrivateSessionAction(data: JoinSession) {
   const user = await getUser();
   if (!user) return { success: false, error: "Authentication required." };
   const validated = JoingSessionSchema.safeParse(data);
   if (!validated.success)
     return { success: false, error: "Invalid form provided data." };
   try {
-    const gameSession = await db.gameSession.findUnique({
-      where: {
-        sessionCode: validated.data.sessionCode,
-      },
-    });
+    let gameSession = null;
+    if (!data.isPublic) {
+      gameSession = await db.gameSession.findUnique({
+        where: {
+          sessionCode: validated.data.sessionCode,
+          isPublic: false,
+        },
+      });
+    } else {
+      gameSession = await db.gameSession.findUnique({
+        where: {
+          id: data.id,
+          isPublic: true,
+        },
+      });
+    }
     if (!gameSession)
       return { success: false, error: "Game session cannot be found." };
     if (!gameSession.isAlive)
@@ -81,7 +93,6 @@ export async function joinSessionAction(data: JoinSession) {
   }
   return { sucess: false, error: "Failed to join the session" };
 }
-
 export async function endSessionAction() {
   const user = await getUser();
   if (!user)
