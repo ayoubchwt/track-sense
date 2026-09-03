@@ -24,7 +24,9 @@ function JoinSession() {
   } = useForm<JoinSession>({
     resolver: zodResolver(JoingSessionSchema),
     defaultValues: {
+      id: "",
       sessionCode: "",
+      isPublic: false,
     },
   });
   const joinSession = async (data: JoinSession) => {

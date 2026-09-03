@@ -47,7 +47,7 @@ export async function createSessionAction(data: CreateSession) {
   }
 }
 
-export async function joinPrivateSessionAction(data: JoinSession) {
+export async function joinSessionAction(data: JoinSession) {
   const user = await getUser();
   if (!user) return { success: false, error: "Authentication required." };
   const validated = JoingSessionSchema.safeParse(data);
@@ -93,6 +93,7 @@ export async function joinPrivateSessionAction(data: JoinSession) {
   }
   return { sucess: false, error: "Failed to join the session" };
 }
+
 export async function endSessionAction() {
   const user = await getUser();
   if (!user)
