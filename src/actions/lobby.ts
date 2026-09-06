@@ -11,11 +11,8 @@ import { type CreateSession, type JoinSession } from "@/types/lobby";
 
 export async function createSessionAction(data: CreateSession) {
   const user = await getUser();
-  if (!user)
-    return {
-      success: false,
-      error: "No authenticed has been done",
-    };
+  if (!user) return { success: false, error: "Authentication required." };
+
   const validated = createSessionSchema.safeParse(data);
   if (!validated.success) {
     return { success: false, error: "Invalid form data provided." };
@@ -91,16 +88,12 @@ export async function joinSessionAction(data: JoinSession) {
     )
       return { success: false, error: "You are already in this session." };
   }
-  return { sucess: false, error: "Failed to join the session" };
+  return { success: false, error: "Failed to join the session" };
 }
 
 export async function endSessionAction() {
   const user = await getUser();
-  if (!user)
-    return {
-      success: false,
-      error: "No authenticed has been done",
-    };
+  if (!user) return { success: false, error: "Authentication required." };
   try {
     const gameSession = await db.gameSession.updateMany({
       where: { ownerId: user.id, isAlive: true },
@@ -110,5 +103,22 @@ export async function endSessionAction() {
   } catch (error) {
     console.log("Error :", error);
     return { success: false, error: `Failed to end session ${error}` };
+  }
+}
+export async function fetchPublicSessionsAction() {
+  const user = await getUser();
+  if (!user) return { success: false, error: "Authentication required." };
+  try {
+    const sessions = await db.gameSession.findMany({
+      where: {
+        isPublic: true,
+      },
+    });
+    if (!sessions)
+      return { success: false, error: "there is no sessions available" };
+    return { success: true, data: sessions };
+  } catch (error) {
+    console.log("error", error);
+    return { success: false, error: `Failed to get sessions ${error}` };
   }
 }

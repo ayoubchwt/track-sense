@@ -77,7 +77,7 @@
     id             String          @id @default(cuid())
     sessionCode    String          @unique
     sessionName    String
-    isPublic       Boolean
+    isPublic       Boolean         @default(false)
     rounds         Int
     genres         String
     isAlive        Boolean         @default(true)

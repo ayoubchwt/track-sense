@@ -307,7 +307,7 @@ export type GameSessionCreateInput = {
   id?: string
   sessionCode: string
   sessionName: string
-  isPublic: boolean
+  isPublic?: boolean
   rounds: number
   genres: string
   isAlive?: boolean
@@ -319,7 +319,7 @@ export type GameSessionUncheckedCreateInput = {
   id?: string
   sessionCode: string
   sessionName: string
-  isPublic: boolean
+  isPublic?: boolean
   rounds: number
   genres: string
   isAlive?: boolean
@@ -355,7 +355,7 @@ export type GameSessionCreateManyInput = {
   id?: string
   sessionCode: string
   sessionName: string
-  isPublic: boolean
+  isPublic?: boolean
   rounds: number
   genres: string
   isAlive?: boolean
@@ -507,7 +507,7 @@ export type GameSessionCreateWithoutOwnerInput = {
   id?: string
   sessionCode: string
   sessionName: string
-  isPublic: boolean
+  isPublic?: boolean
   rounds: number
   genres: string
   isAlive?: boolean
@@ -518,7 +518,7 @@ export type GameSessionUncheckedCreateWithoutOwnerInput = {
   id?: string
   sessionCode: string
   sessionName: string
-  isPublic: boolean
+  isPublic?: boolean
   rounds: number
   genres: string
   isAlive?: boolean
@@ -569,7 +569,7 @@ export type GameSessionCreateWithoutSessionPlayersInput = {
   id?: string
   sessionCode: string
   sessionName: string
-  isPublic: boolean
+  isPublic?: boolean
   rounds: number
   genres: string
   isAlive?: boolean
@@ -580,7 +580,7 @@ export type GameSessionUncheckedCreateWithoutSessionPlayersInput = {
   id?: string
   sessionCode: string
   sessionName: string
-  isPublic: boolean
+  isPublic?: boolean
   rounds: number
   genres: string
   isAlive?: boolean
@@ -629,7 +629,7 @@ export type GameSessionCreateManyOwnerInput = {
   id?: string
   sessionCode: string
   sessionName: string
-  isPublic: boolean
+  isPublic?: boolean
   rounds: number
   genres: string
   isAlive?: boolean
