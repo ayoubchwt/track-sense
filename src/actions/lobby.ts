@@ -7,7 +7,11 @@ import {
   createSessionSchema,
   JoingSessionSchema,
 } from "@/lib/validations/lobby";
-import { type CreateSession, type JoinSession } from "@/types/lobby";
+import {
+  publicSession,
+  type CreateSession,
+  type JoinSession,
+} from "@/types/lobby";
 
 export async function createSessionAction(data: CreateSession) {
   const user = await getUser();
@@ -113,10 +117,28 @@ export async function fetchPublicSessionsAction() {
       where: {
         isPublic: true,
       },
+      select: {
+        id: true,
+        sessionName: true,
+        rounds: true,
+        genres: true,
+        owner: {
+          select: {
+            name: true,
+          },
+        },
+      },
     });
     if (!sessions)
       return { success: false, error: "there is no sessions available" };
-    return { success: true, data: sessions };
+    const formattedSessions: publicSession[] = sessions.map((session) => ({
+      id: session.id,
+      sessionName: session.sessionName,
+      genres: session.genres,
+      rounds: session.rounds,
+      ownerName: session.owner.name,
+    }));
+    return { success: true, data: formattedSessions };
   } catch (error) {
     console.log("error", error);
     return { success: false, error: `Failed to get sessions ${error}` };

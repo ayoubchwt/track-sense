@@ -14,7 +14,7 @@ import { joinSessionAction } from "@/actions/lobby";
 import { useRouter } from "next/navigation";
 import Spinner from "@/components/ui/spinner";
 function JoinSession() {
-  const [isLoading, setIsLoading] = useState<boolean | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
   const router = useRouter();
   const {
@@ -42,7 +42,7 @@ function JoinSession() {
     }
   };
   return (
-    <div className="flex flex-col w-full gap-10">
+    <div className="flex flex-col w-full gap-10 justify-start min-h-120">
       <form
         onSubmit={handleSubmit(joinSession)}
         className="flex flex-col gap-2"

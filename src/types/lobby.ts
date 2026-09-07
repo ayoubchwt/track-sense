@@ -10,3 +10,10 @@ export interface JoinSession {
   sessionCode?: string;
   isPublic: boolean;
 }
+export interface publicSession {
+  id?: string;
+  sessionName: string;
+  genres: string;
+  rounds: number;
+  ownerName: string;
+}
