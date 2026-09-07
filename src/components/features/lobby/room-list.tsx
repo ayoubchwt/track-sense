@@ -1,3 +1,4 @@
+"use client";
 import Label from "@/components/ui/label";
 import RoomItem from "./room-item";
 import { fetchPublicSessionsAction } from "@/actions/lobby";
@@ -8,13 +9,13 @@ import ErrorText from "@/components/ui/error-text";
 function RoomList() {
   const [serverError, setServerError] = useState<string | null>(null);
   const [isPending, setIsPending] = useState(false);
-  const [sessions, setSessions] = useState<publicSession[] | null>();
+  const [sessions, setSessions] = useState<publicSession[]>([]);
   useEffect(() => {
     const loadSessions = async () => {
       setServerError(null);
       setIsPending(true);
       const response = await fetchPublicSessionsAction();
-      if (response.success) setSessions(response.data);
+      if (response.success && response.data) setSessions(response.data);
       if (response.error) setServerError(response.error);
       setIsPending(false);
     };
@@ -29,6 +30,7 @@ function RoomList() {
         return (
           <RoomItem
             key={session.id}
+            id={session.id}
             label={session.sessionName}
             owner={session.ownerName}
             genre={session.genres}

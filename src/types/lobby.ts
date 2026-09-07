@@ -11,7 +11,7 @@ export interface JoinSession {
   isPublic: boolean;
 }
 export interface publicSession {
-  id?: string;
+  id: string;
   sessionName: string;
   genres: string;
   rounds: number;
