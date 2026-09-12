@@ -109,26 +109,40 @@ export async function endSessionAction() {
     return { success: false, error: `Failed to end session ${error}` };
   }
 }
-export async function fetchPublicSessionsAction() {
+
+export async function fetchPublicSessionsAction(page: number = 1) {
+  const PAGE_SIZE = 5;
   const user = await getUser();
   if (!user) return { success: false, error: "Authentication required." };
+  const currentPage = Math.max(1, page);
+  const skip = (currentPage - 1) * PAGE_SIZE;
   try {
-    const sessions = await db.gameSession.findMany({
-      where: {
-        isPublic: true,
-      },
-      select: {
-        id: true,
-        sessionName: true,
-        rounds: true,
-        genres: true,
-        owner: {
-          select: {
-            name: true,
+    const [sessions, totalSessions] = await Promise.all([
+      await db.gameSession.findMany({
+        where: {
+          isPublic: true,
+        },
+        take: PAGE_SIZE,
+        skip: skip,
+        orderBy: { createdAt: "desc" },
+        select: {
+          id: true,
+          sessionName: true,
+          rounds: true,
+          genres: true,
+          owner: {
+            select: {
+              name: true,
+            },
           },
         },
-      },
-    });
+      }),
+      db.gameSession.count({
+        where: {
+          isPublic: true,
+        },
+      }),
+    ]);
     if (!sessions)
       return { success: false, error: "there is no sessions available" };
     const formattedSessions: publicSession[] = sessions.map((session) => ({
@@ -138,7 +152,10 @@ export async function fetchPublicSessionsAction() {
       rounds: session.rounds,
       ownerName: session.owner.name,
     }));
-    return { success: true, data: formattedSessions };
+    return {
+      success: true,
+      data: { sessions: formattedSessions, totalSessions, currentPage },
+    };
   } catch (error) {
     console.log("error", error);
     return { success: false, error: `Failed to get sessions ${error}` };

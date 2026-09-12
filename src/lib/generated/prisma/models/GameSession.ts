@@ -43,6 +43,7 @@ export type GameSessionMinAggregateOutputType = {
   genres: string | null
   isAlive: boolean | null
   ownerId: string | null
+  createdAt: Date | null
 }
 
 export type GameSessionMaxAggregateOutputType = {
@@ -54,6 +55,7 @@ export type GameSessionMaxAggregateOutputType = {
   genres: string | null
   isAlive: boolean | null
   ownerId: string | null
+  createdAt: Date | null
 }
 
 export type GameSessionCountAggregateOutputType = {
@@ -65,6 +67,7 @@ export type GameSessionCountAggregateOutputType = {
   genres: number
   isAlive: number
   ownerId: number
+  createdAt: number
   _all: number
 }
 
@@ -86,6 +89,7 @@ export type GameSessionMinAggregateInputType = {
   genres?: true
   isAlive?: true
   ownerId?: true
+  createdAt?: true
 }
 
 export type GameSessionMaxAggregateInputType = {
@@ -97,6 +101,7 @@ export type GameSessionMaxAggregateInputType = {
   genres?: true
   isAlive?: true
   ownerId?: true
+  createdAt?: true
 }
 
 export type GameSessionCountAggregateInputType = {
@@ -108,6 +113,7 @@ export type GameSessionCountAggregateInputType = {
   genres?: true
   isAlive?: true
   ownerId?: true
+  createdAt?: true
   _all?: true
 }
 
@@ -206,6 +212,7 @@ export type GameSessionGroupByOutputType = {
   genres: string
   isAlive: boolean
   ownerId: string
+  createdAt: Date
   _count: GameSessionCountAggregateOutputType | null
   _avg: GameSessionAvgAggregateOutputType | null
   _sum: GameSessionSumAggregateOutputType | null
@@ -240,6 +247,7 @@ export type GameSessionWhereInput = {
   genres?: Prisma.StringFilter<"GameSession"> | string
   isAlive?: Prisma.BoolFilter<"GameSession"> | boolean
   ownerId?: Prisma.StringFilter<"GameSession"> | string
+  createdAt?: Prisma.DateTimeFilter<"GameSession"> | Date | string
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   sessionPlayers?: Prisma.SessionPlayerListRelationFilter
 }
@@ -253,6 +261,7 @@ export type GameSessionOrderByWithRelationInput = {
   genres?: Prisma.SortOrder
   isAlive?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   owner?: Prisma.UserOrderByWithRelationInput
   sessionPlayers?: Prisma.SessionPlayerOrderByRelationAggregateInput
 }
@@ -269,6 +278,7 @@ export type GameSessionWhereUniqueInput = Prisma.AtLeast<{
   genres?: Prisma.StringFilter<"GameSession"> | string
   isAlive?: Prisma.BoolFilter<"GameSession"> | boolean
   ownerId?: Prisma.StringFilter<"GameSession"> | string
+  createdAt?: Prisma.DateTimeFilter<"GameSession"> | Date | string
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   sessionPlayers?: Prisma.SessionPlayerListRelationFilter
 }, "id" | "sessionCode">
@@ -282,6 +292,7 @@ export type GameSessionOrderByWithAggregationInput = {
   genres?: Prisma.SortOrder
   isAlive?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   _count?: Prisma.GameSessionCountOrderByAggregateInput
   _avg?: Prisma.GameSessionAvgOrderByAggregateInput
   _max?: Prisma.GameSessionMaxOrderByAggregateInput
@@ -301,6 +312,7 @@ export type GameSessionScalarWhereWithAggregatesInput = {
   genres?: Prisma.StringWithAggregatesFilter<"GameSession"> | string
   isAlive?: Prisma.BoolWithAggregatesFilter<"GameSession"> | boolean
   ownerId?: Prisma.StringWithAggregatesFilter<"GameSession"> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"GameSession"> | Date | string
 }
 
 export type GameSessionCreateInput = {
@@ -311,6 +323,7 @@ export type GameSessionCreateInput = {
   rounds: number
   genres: string
   isAlive?: boolean
+  createdAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutGameSessionsInput
   sessionPlayers?: Prisma.SessionPlayerCreateNestedManyWithoutGameSessionInput
 }
@@ -324,6 +337,7 @@ export type GameSessionUncheckedCreateInput = {
   genres: string
   isAlive?: boolean
   ownerId: string
+  createdAt?: Date | string
   sessionPlayers?: Prisma.SessionPlayerUncheckedCreateNestedManyWithoutGameSessionInput
 }
 
@@ -335,6 +349,7 @@ export type GameSessionUpdateInput = {
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutGameSessionsNestedInput
   sessionPlayers?: Prisma.SessionPlayerUpdateManyWithoutGameSessionNestedInput
 }
@@ -348,6 +363,7 @@ export type GameSessionUncheckedUpdateInput = {
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessionPlayers?: Prisma.SessionPlayerUncheckedUpdateManyWithoutGameSessionNestedInput
 }
 
@@ -360,6 +376,7 @@ export type GameSessionCreateManyInput = {
   genres: string
   isAlive?: boolean
   ownerId: string
+  createdAt?: Date | string
 }
 
 export type GameSessionUpdateManyMutationInput = {
@@ -370,6 +387,7 @@ export type GameSessionUpdateManyMutationInput = {
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type GameSessionUncheckedUpdateManyInput = {
@@ -381,6 +399,7 @@ export type GameSessionUncheckedUpdateManyInput = {
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type GameSessionListRelationFilter = {
@@ -402,6 +421,7 @@ export type GameSessionCountOrderByAggregateInput = {
   genres?: Prisma.SortOrder
   isAlive?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type GameSessionAvgOrderByAggregateInput = {
@@ -417,6 +437,7 @@ export type GameSessionMaxOrderByAggregateInput = {
   genres?: Prisma.SortOrder
   isAlive?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type GameSessionMinOrderByAggregateInput = {
@@ -428,6 +449,7 @@ export type GameSessionMinOrderByAggregateInput = {
   genres?: Prisma.SortOrder
   isAlive?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type GameSessionSumOrderByAggregateInput = {
@@ -511,6 +533,7 @@ export type GameSessionCreateWithoutOwnerInput = {
   rounds: number
   genres: string
   isAlive?: boolean
+  createdAt?: Date | string
   sessionPlayers?: Prisma.SessionPlayerCreateNestedManyWithoutGameSessionInput
 }
 
@@ -522,6 +545,7 @@ export type GameSessionUncheckedCreateWithoutOwnerInput = {
   rounds: number
   genres: string
   isAlive?: boolean
+  createdAt?: Date | string
   sessionPlayers?: Prisma.SessionPlayerUncheckedCreateNestedManyWithoutGameSessionInput
 }
 
@@ -563,6 +587,7 @@ export type GameSessionScalarWhereInput = {
   genres?: Prisma.StringFilter<"GameSession"> | string
   isAlive?: Prisma.BoolFilter<"GameSession"> | boolean
   ownerId?: Prisma.StringFilter<"GameSession"> | string
+  createdAt?: Prisma.DateTimeFilter<"GameSession"> | Date | string
 }
 
 export type GameSessionCreateWithoutSessionPlayersInput = {
@@ -573,6 +598,7 @@ export type GameSessionCreateWithoutSessionPlayersInput = {
   rounds: number
   genres: string
   isAlive?: boolean
+  createdAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutGameSessionsInput
 }
 
@@ -585,6 +611,7 @@ export type GameSessionUncheckedCreateWithoutSessionPlayersInput = {
   genres: string
   isAlive?: boolean
   ownerId: string
+  createdAt?: Date | string
 }
 
 export type GameSessionCreateOrConnectWithoutSessionPlayersInput = {
@@ -611,6 +638,7 @@ export type GameSessionUpdateWithoutSessionPlayersInput = {
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutGameSessionsNestedInput
 }
 
@@ -623,6 +651,7 @@ export type GameSessionUncheckedUpdateWithoutSessionPlayersInput = {
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type GameSessionCreateManyOwnerInput = {
@@ -633,6 +662,7 @@ export type GameSessionCreateManyOwnerInput = {
   rounds: number
   genres: string
   isAlive?: boolean
+  createdAt?: Date | string
 }
 
 export type GameSessionUpdateWithoutOwnerInput = {
@@ -643,6 +673,7 @@ export type GameSessionUpdateWithoutOwnerInput = {
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessionPlayers?: Prisma.SessionPlayerUpdateManyWithoutGameSessionNestedInput
 }
 
@@ -654,6 +685,7 @@ export type GameSessionUncheckedUpdateWithoutOwnerInput = {
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessionPlayers?: Prisma.SessionPlayerUncheckedUpdateManyWithoutGameSessionNestedInput
 }
 
@@ -665,6 +697,7 @@ export type GameSessionUncheckedUpdateManyWithoutOwnerInput = {
   rounds?: Prisma.IntFieldUpdateOperationsInput | number
   genres?: Prisma.StringFieldUpdateOperationsInput | string
   isAlive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -707,6 +740,7 @@ export type GameSessionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   genres?: boolean
   isAlive?: boolean
   ownerId?: boolean
+  createdAt?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   sessionPlayers?: boolean | Prisma.GameSession$sessionPlayersArgs<ExtArgs>
   _count?: boolean | Prisma.GameSessionCountOutputTypeDefaultArgs<ExtArgs>
@@ -721,6 +755,7 @@ export type GameSessionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   genres?: boolean
   isAlive?: boolean
   ownerId?: boolean
+  createdAt?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["gameSession"]>
 
@@ -733,6 +768,7 @@ export type GameSessionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   genres?: boolean
   isAlive?: boolean
   ownerId?: boolean
+  createdAt?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["gameSession"]>
 
@@ -745,9 +781,10 @@ export type GameSessionSelectScalar = {
   genres?: boolean
   isAlive?: boolean
   ownerId?: boolean
+  createdAt?: boolean
 }
 
-export type GameSessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sessionCode" | "sessionName" | "isPublic" | "rounds" | "genres" | "isAlive" | "ownerId", ExtArgs["result"]["gameSession"]>
+export type GameSessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sessionCode" | "sessionName" | "isPublic" | "rounds" | "genres" | "isAlive" | "ownerId" | "createdAt", ExtArgs["result"]["gameSession"]>
 export type GameSessionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   sessionPlayers?: boolean | Prisma.GameSession$sessionPlayersArgs<ExtArgs>
@@ -775,6 +812,7 @@ export type $GameSessionPayload<ExtArgs extends runtime.Types.Extensions.Interna
     genres: string
     isAlive: boolean
     ownerId: string
+    createdAt: Date
   }, ExtArgs["result"]["gameSession"]>
   composites: {}
 }
@@ -1208,6 +1246,7 @@ export interface GameSessionFieldRefs {
   readonly genres: Prisma.FieldRef<"GameSession", 'String'>
   readonly isAlive: Prisma.FieldRef<"GameSession", 'Boolean'>
   readonly ownerId: Prisma.FieldRef<"GameSession", 'String'>
+  readonly createdAt: Prisma.FieldRef<"GameSession", 'DateTime'>
 }
     
 

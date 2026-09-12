@@ -84,7 +84,7 @@
     ownerId        String
     owner          User            @relation(fields: [ownerId], references: [id])
     sessionPlayers SessionPlayer[]
-
+    createdAt      DateTime        @default(now())
     @@map("gameSession")
   }
 
