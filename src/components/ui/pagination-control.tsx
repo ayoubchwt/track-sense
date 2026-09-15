@@ -10,17 +10,25 @@ function PagiantionControl({
   totalPages: number;
   onChange: (value: number) => void;
 }) {
-  if (totalPages <= currentPage) return null;
+  if (totalPages < currentPage) return null;
   return (
     <div className="flex items-center justify-between">
       <p>
         Page {currentPage} of {totalPages}
       </p>
       <div className="flex items-center justify-center gap-2">
-        <Button variant="primary" onClick={() => onChange(currentPage - 1)}>
+        <Button
+          variant="primary"
+          onClick={() => onChange(currentPage - 1)}
+          disabled={currentPage <= 1}
+        >
           <ChevronLeft className="w-4 h-4" />
         </Button>
-        <Button variant="primary" onClick={() => onChange(currentPage + 1)}>
+        <Button
+          variant="primary"
+          onClick={() => onChange(currentPage + 1)}
+          disabled={currentPage >= totalPages}
+        >
           <ChevronRight className="w-4 h-4" />
         </Button>
       </div>

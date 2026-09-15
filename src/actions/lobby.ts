@@ -154,10 +154,35 @@ export async function fetchPublicSessionsAction(page: number = 1) {
     }));
     return {
       success: true,
-      data: { sessions: formattedSessions, totalSessions, currentPage },
+      data: {
+        sessions: formattedSessions,
+        totalSessions: Math.ceil(totalSessions / PAGE_SIZE),
+        currentPage,
+      },
     };
   } catch (error) {
     console.log("error", error);
     return { success: false, error: `Failed to get sessions ${error}` };
   }
+}
+
+export async function verifyUserJoined(sessionId: string) {
+  const user = await getUser();
+  if (!user) return { success: false, error: "Authentication required." };
+  const gameSession = await db.gameSession.findMany({
+    where: {
+      id: sessionId,
+      sessionPlayers: {
+        some: {
+          userId: user.id,
+        },
+      },
+    },
+  });
+  if (!gameSession)
+    return {
+      success: false,
+      error: "Failed to join session. please try again",
+    };
+  return { success: true, data: gameSession };
 }

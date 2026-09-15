@@ -33,9 +33,9 @@ function JoinSession() {
     setIsLoading(true);
     setServerError(null);
     const response = await joinSessionAction(data);
-    if (response.success) {
+    if (response.success && response.data) {
       setIsLoading(false);
-      router.push("/play");
+      router.push(`/play/${encodeURIComponent(response.data?.id)}`);
     } else {
       setIsLoading(false);
       setServerError(response.error || "Server Error");

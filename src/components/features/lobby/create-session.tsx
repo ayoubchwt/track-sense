@@ -19,7 +19,7 @@ import Checkbox from "@/components/ui/checkbox";
 
 function CreateSession() {
   const [serverError, setServerError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isPending, setIsPending] = useState(false);
   const [isPublic, setIsPublic] = useState(false);
   const router = useRouter();
   const {
@@ -41,14 +41,14 @@ function CreateSession() {
     name: "sessionCode",
   });
   const createSession = async (data: CreateSession) => {
-    setIsLoading(true);
+    setIsPending(true);
     const response = await createSessionAction(data);
-    if (response.success) {
-      setIsLoading(false);
-      router.push("/play");
+    if (response.success && response.data) {
+      router.push(`/play/${encodeURIComponent(response.data.id)}`);
+      setIsPending(false);
     } else {
-      setIsLoading(false);
       setServerError(response.error || "Server Error");
+      setIsPending(false);
     }
   };
   return (
@@ -120,7 +120,7 @@ function CreateSession() {
         </div>
       )}
       <Button variant="primary">
-        {isLoading ? (
+        {isPending ? (
           <Spinner
             size="sm"
             className="border-t-(--bg) border-l-(--bg)"

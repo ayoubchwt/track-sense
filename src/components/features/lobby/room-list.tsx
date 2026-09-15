@@ -31,7 +31,7 @@ function RoomList() {
   if (isPending) return <Spinner size="md"></Spinner>;
   if (serverError) return <ErrorText>{serverError}</ErrorText>;
   return (
-    <div>
+    <div className="flex flex-col h-70">
       <Label>Public sessions</Label>
       {sessions?.map((session) => {
         return (
