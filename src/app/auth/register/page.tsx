@@ -1,13 +1,12 @@
-import GuardRoute from "@/components/features/auth/guard-route";
 import RegisterForm from "@/components/features/auth/register-form";
+import { verifyUser } from "@/lib/auth/utils";
 
-function Register() {
+async function Register() {
+  await verifyUser(false);
   return (
-    <GuardRoute isProtected={false} redirectTo="/lobby">
-      <div className="flex flex-col items-center justify-center flex-1">
-        <RegisterForm></RegisterForm>
-      </div>
-    </GuardRoute>
+    <div className="flex flex-col items-center justify-center flex-1">
+      <RegisterForm></RegisterForm>
+    </div>
   );
 }
 export default Register;

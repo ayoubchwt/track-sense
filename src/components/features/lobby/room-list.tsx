@@ -28,23 +28,28 @@ function RoomList() {
     };
     loadSessions();
   }, [currentPage]);
-  if (isPending) return <Spinner size="md"></Spinner>;
   if (serverError) return <ErrorText>{serverError}</ErrorText>;
   return (
     <div className="flex flex-col h-70">
-      <Label>Public sessions</Label>
-      {sessions?.map((session) => {
-        return (
-          <RoomItem
-            key={session.id}
-            id={session.id}
-            label={session.sessionName}
-            owner={session.ownerName}
-            genre={session.genres}
-            rounds={session.rounds}
-          />
-        );
-      })}
+      <div className="flex flex-col flex-1">
+        <Label>Public sessions</Label>
+        {isPending ? (
+          <Spinner size="md" className="m-auto"></Spinner>
+        ) : (
+          sessions?.map((session) => {
+            return (
+              <RoomItem
+                key={session.id}
+                id={session.id}
+                label={session.sessionName}
+                owner={session.ownerName}
+                genre={session.genres}
+                rounds={session.rounds}
+              />
+            );
+          })
+        )}
+      </div>
       <PagiantionControl
         currentPage={currentPage}
         totalPages={totalPages}

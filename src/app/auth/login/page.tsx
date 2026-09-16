@@ -1,13 +1,12 @@
-import GuardRoute from "@/components/features/auth/guard-route";
 import LoginForm from "@/components/features/auth/login-form";
+import { verifyUser } from "@/lib/auth/utils";
 
-function Login() {
+async function Login() {
+  await verifyUser(false);
   return (
-    <GuardRoute isProtected={false} redirectTo="/lobby">
-      <div className="flex flex-col items-center justify-center flex-1">
-        <LoginForm></LoginForm>
-      </div>
-    </GuardRoute>
+    <div className="flex flex-col items-center justify-center flex-1">
+      <LoginForm></LoginForm>
+    </div>
   );
 }
 export default Login;

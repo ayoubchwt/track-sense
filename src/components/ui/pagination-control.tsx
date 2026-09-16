@@ -13,12 +13,13 @@ function PagiantionControl({
   if (totalPages < currentPage) return null;
   return (
     <div className="flex items-center justify-between">
-      <p>
+      <p className="text-sm text-(--text-light)">
         Page {currentPage} of {totalPages}
       </p>
       <div className="flex items-center justify-center gap-2">
         <Button
           variant="primary"
+          className="p-2"
           onClick={() => onChange(currentPage - 1)}
           disabled={currentPage <= 1}
         >
@@ -26,6 +27,7 @@ function PagiantionControl({
         </Button>
         <Button
           variant="primary"
+          className="p-2"
           onClick={() => onChange(currentPage + 1)}
           disabled={currentPage >= totalPages}
         >

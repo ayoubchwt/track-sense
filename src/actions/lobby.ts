@@ -111,7 +111,7 @@ export async function endSessionAction() {
 }
 
 export async function fetchPublicSessionsAction(page: number = 1) {
-  const PAGE_SIZE = 5;
+  const PAGE_SIZE = 4;
   const user = await getUser();
   if (!user) return { success: false, error: "Authentication required." };
   const currentPage = Math.max(1, page);
