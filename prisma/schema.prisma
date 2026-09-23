@@ -92,7 +92,7 @@
     id     String @id @default(cuid())
     userId String
     user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+    isActive Boolean @default(true)
     gameSessionId String
     gameSession   GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
     score         Int         @default(0)

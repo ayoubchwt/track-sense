@@ -190,7 +190,7 @@ export async function verifyUserJoined(sessionId: string) {
 export async function findPlayerSession() {
   const user = await getUser();
   if (!user) return { success: false, error: "Authentication required." };
-  const gameSession = await db.gameSession.findFirstOrThrow({
+  const gameSession = await db.gameSession.findFirst({
     where: {
       sessionPlayers: {
         some: {

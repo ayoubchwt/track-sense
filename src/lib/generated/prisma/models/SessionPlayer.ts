@@ -37,6 +37,7 @@ export type SessionPlayerSumAggregateOutputType = {
 export type SessionPlayerMinAggregateOutputType = {
   id: string | null
   userId: string | null
+  isActive: boolean | null
   gameSessionId: string | null
   score: number | null
   joinedAt: Date | null
@@ -45,6 +46,7 @@ export type SessionPlayerMinAggregateOutputType = {
 export type SessionPlayerMaxAggregateOutputType = {
   id: string | null
   userId: string | null
+  isActive: boolean | null
   gameSessionId: string | null
   score: number | null
   joinedAt: Date | null
@@ -53,6 +55,7 @@ export type SessionPlayerMaxAggregateOutputType = {
 export type SessionPlayerCountAggregateOutputType = {
   id: number
   userId: number
+  isActive: number
   gameSessionId: number
   score: number
   joinedAt: number
@@ -71,6 +74,7 @@ export type SessionPlayerSumAggregateInputType = {
 export type SessionPlayerMinAggregateInputType = {
   id?: true
   userId?: true
+  isActive?: true
   gameSessionId?: true
   score?: true
   joinedAt?: true
@@ -79,6 +83,7 @@ export type SessionPlayerMinAggregateInputType = {
 export type SessionPlayerMaxAggregateInputType = {
   id?: true
   userId?: true
+  isActive?: true
   gameSessionId?: true
   score?: true
   joinedAt?: true
@@ -87,6 +92,7 @@ export type SessionPlayerMaxAggregateInputType = {
 export type SessionPlayerCountAggregateInputType = {
   id?: true
   userId?: true
+  isActive?: true
   gameSessionId?: true
   score?: true
   joinedAt?: true
@@ -182,6 +188,7 @@ export type SessionPlayerGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 export type SessionPlayerGroupByOutputType = {
   id: string
   userId: string
+  isActive: boolean
   gameSessionId: string
   score: number
   joinedAt: Date
@@ -213,6 +220,7 @@ export type SessionPlayerWhereInput = {
   NOT?: Prisma.SessionPlayerWhereInput | Prisma.SessionPlayerWhereInput[]
   id?: Prisma.StringFilter<"SessionPlayer"> | string
   userId?: Prisma.StringFilter<"SessionPlayer"> | string
+  isActive?: Prisma.BoolFilter<"SessionPlayer"> | boolean
   gameSessionId?: Prisma.StringFilter<"SessionPlayer"> | string
   score?: Prisma.IntFilter<"SessionPlayer"> | number
   joinedAt?: Prisma.DateTimeFilter<"SessionPlayer"> | Date | string
@@ -223,6 +231,7 @@ export type SessionPlayerWhereInput = {
 export type SessionPlayerOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   gameSessionId?: Prisma.SortOrder
   score?: Prisma.SortOrder
   joinedAt?: Prisma.SortOrder
@@ -237,6 +246,7 @@ export type SessionPlayerWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.SessionPlayerWhereInput[]
   NOT?: Prisma.SessionPlayerWhereInput | Prisma.SessionPlayerWhereInput[]
   userId?: Prisma.StringFilter<"SessionPlayer"> | string
+  isActive?: Prisma.BoolFilter<"SessionPlayer"> | boolean
   gameSessionId?: Prisma.StringFilter<"SessionPlayer"> | string
   score?: Prisma.IntFilter<"SessionPlayer"> | number
   joinedAt?: Prisma.DateTimeFilter<"SessionPlayer"> | Date | string
@@ -247,6 +257,7 @@ export type SessionPlayerWhereUniqueInput = Prisma.AtLeast<{
 export type SessionPlayerOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   gameSessionId?: Prisma.SortOrder
   score?: Prisma.SortOrder
   joinedAt?: Prisma.SortOrder
@@ -263,6 +274,7 @@ export type SessionPlayerScalarWhereWithAggregatesInput = {
   NOT?: Prisma.SessionPlayerScalarWhereWithAggregatesInput | Prisma.SessionPlayerScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"SessionPlayer"> | string
   userId?: Prisma.StringWithAggregatesFilter<"SessionPlayer"> | string
+  isActive?: Prisma.BoolWithAggregatesFilter<"SessionPlayer"> | boolean
   gameSessionId?: Prisma.StringWithAggregatesFilter<"SessionPlayer"> | string
   score?: Prisma.IntWithAggregatesFilter<"SessionPlayer"> | number
   joinedAt?: Prisma.DateTimeWithAggregatesFilter<"SessionPlayer"> | Date | string
@@ -270,6 +282,7 @@ export type SessionPlayerScalarWhereWithAggregatesInput = {
 
 export type SessionPlayerCreateInput = {
   id?: string
+  isActive?: boolean
   score?: number
   joinedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutSessionPlayersInput
@@ -279,6 +292,7 @@ export type SessionPlayerCreateInput = {
 export type SessionPlayerUncheckedCreateInput = {
   id?: string
   userId: string
+  isActive?: boolean
   gameSessionId: string
   score?: number
   joinedAt?: Date | string
@@ -286,6 +300,7 @@ export type SessionPlayerUncheckedCreateInput = {
 
 export type SessionPlayerUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   score?: Prisma.IntFieldUpdateOperationsInput | number
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutSessionPlayersNestedInput
@@ -295,6 +310,7 @@ export type SessionPlayerUpdateInput = {
 export type SessionPlayerUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gameSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -303,6 +319,7 @@ export type SessionPlayerUncheckedUpdateInput = {
 export type SessionPlayerCreateManyInput = {
   id?: string
   userId: string
+  isActive?: boolean
   gameSessionId: string
   score?: number
   joinedAt?: Date | string
@@ -310,6 +327,7 @@ export type SessionPlayerCreateManyInput = {
 
 export type SessionPlayerUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   score?: Prisma.IntFieldUpdateOperationsInput | number
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -317,6 +335,7 @@ export type SessionPlayerUpdateManyMutationInput = {
 export type SessionPlayerUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gameSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -340,6 +359,7 @@ export type SessionPlayerUserIdGameSessionIdCompoundUniqueInput = {
 export type SessionPlayerCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   gameSessionId?: Prisma.SortOrder
   score?: Prisma.SortOrder
   joinedAt?: Prisma.SortOrder
@@ -352,6 +372,7 @@ export type SessionPlayerAvgOrderByAggregateInput = {
 export type SessionPlayerMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   gameSessionId?: Prisma.SortOrder
   score?: Prisma.SortOrder
   joinedAt?: Prisma.SortOrder
@@ -360,6 +381,7 @@ export type SessionPlayerMaxOrderByAggregateInput = {
 export type SessionPlayerMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   gameSessionId?: Prisma.SortOrder
   score?: Prisma.SortOrder
   joinedAt?: Prisma.SortOrder
@@ -455,6 +477,7 @@ export type SessionPlayerUncheckedUpdateManyWithoutGameSessionNestedInput = {
 
 export type SessionPlayerCreateWithoutUserInput = {
   id?: string
+  isActive?: boolean
   score?: number
   joinedAt?: Date | string
   gameSession: Prisma.GameSessionCreateNestedOneWithoutSessionPlayersInput
@@ -462,6 +485,7 @@ export type SessionPlayerCreateWithoutUserInput = {
 
 export type SessionPlayerUncheckedCreateWithoutUserInput = {
   id?: string
+  isActive?: boolean
   gameSessionId: string
   score?: number
   joinedAt?: Date | string
@@ -499,6 +523,7 @@ export type SessionPlayerScalarWhereInput = {
   NOT?: Prisma.SessionPlayerScalarWhereInput | Prisma.SessionPlayerScalarWhereInput[]
   id?: Prisma.StringFilter<"SessionPlayer"> | string
   userId?: Prisma.StringFilter<"SessionPlayer"> | string
+  isActive?: Prisma.BoolFilter<"SessionPlayer"> | boolean
   gameSessionId?: Prisma.StringFilter<"SessionPlayer"> | string
   score?: Prisma.IntFilter<"SessionPlayer"> | number
   joinedAt?: Prisma.DateTimeFilter<"SessionPlayer"> | Date | string
@@ -506,6 +531,7 @@ export type SessionPlayerScalarWhereInput = {
 
 export type SessionPlayerCreateWithoutGameSessionInput = {
   id?: string
+  isActive?: boolean
   score?: number
   joinedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutSessionPlayersInput
@@ -514,6 +540,7 @@ export type SessionPlayerCreateWithoutGameSessionInput = {
 export type SessionPlayerUncheckedCreateWithoutGameSessionInput = {
   id?: string
   userId: string
+  isActive?: boolean
   score?: number
   joinedAt?: Date | string
 }
@@ -546,6 +573,7 @@ export type SessionPlayerUpdateManyWithWhereWithoutGameSessionInput = {
 
 export type SessionPlayerCreateManyUserInput = {
   id?: string
+  isActive?: boolean
   gameSessionId: string
   score?: number
   joinedAt?: Date | string
@@ -553,6 +581,7 @@ export type SessionPlayerCreateManyUserInput = {
 
 export type SessionPlayerUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   score?: Prisma.IntFieldUpdateOperationsInput | number
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gameSession?: Prisma.GameSessionUpdateOneRequiredWithoutSessionPlayersNestedInput
@@ -560,6 +589,7 @@ export type SessionPlayerUpdateWithoutUserInput = {
 
 export type SessionPlayerUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gameSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -567,6 +597,7 @@ export type SessionPlayerUncheckedUpdateWithoutUserInput = {
 
 export type SessionPlayerUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gameSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -575,12 +606,14 @@ export type SessionPlayerUncheckedUpdateManyWithoutUserInput = {
 export type SessionPlayerCreateManyGameSessionInput = {
   id?: string
   userId: string
+  isActive?: boolean
   score?: number
   joinedAt?: Date | string
 }
 
 export type SessionPlayerUpdateWithoutGameSessionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   score?: Prisma.IntFieldUpdateOperationsInput | number
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutSessionPlayersNestedInput
@@ -589,6 +622,7 @@ export type SessionPlayerUpdateWithoutGameSessionInput = {
 export type SessionPlayerUncheckedUpdateWithoutGameSessionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   score?: Prisma.IntFieldUpdateOperationsInput | number
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -596,6 +630,7 @@ export type SessionPlayerUncheckedUpdateWithoutGameSessionInput = {
 export type SessionPlayerUncheckedUpdateManyWithoutGameSessionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   score?: Prisma.IntFieldUpdateOperationsInput | number
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -605,6 +640,7 @@ export type SessionPlayerUncheckedUpdateManyWithoutGameSessionInput = {
 export type SessionPlayerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  isActive?: boolean
   gameSessionId?: boolean
   score?: boolean
   joinedAt?: boolean
@@ -615,6 +651,7 @@ export type SessionPlayerSelect<ExtArgs extends runtime.Types.Extensions.Interna
 export type SessionPlayerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  isActive?: boolean
   gameSessionId?: boolean
   score?: boolean
   joinedAt?: boolean
@@ -625,6 +662,7 @@ export type SessionPlayerSelectCreateManyAndReturn<ExtArgs extends runtime.Types
 export type SessionPlayerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  isActive?: boolean
   gameSessionId?: boolean
   score?: boolean
   joinedAt?: boolean
@@ -635,12 +673,13 @@ export type SessionPlayerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
 export type SessionPlayerSelectScalar = {
   id?: boolean
   userId?: boolean
+  isActive?: boolean
   gameSessionId?: boolean
   score?: boolean
   joinedAt?: boolean
 }
 
-export type SessionPlayerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "gameSessionId" | "score" | "joinedAt", ExtArgs["result"]["sessionPlayer"]>
+export type SessionPlayerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "isActive" | "gameSessionId" | "score" | "joinedAt", ExtArgs["result"]["sessionPlayer"]>
 export type SessionPlayerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   gameSession?: boolean | Prisma.GameSessionDefaultArgs<ExtArgs>
@@ -663,6 +702,7 @@ export type $SessionPlayerPayload<ExtArgs extends runtime.Types.Extensions.Inter
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
+    isActive: boolean
     gameSessionId: string
     score: number
     joinedAt: Date
@@ -1093,6 +1133,7 @@ export interface Prisma__SessionPlayerClient<T, Null = never, ExtArgs extends ru
 export interface SessionPlayerFieldRefs {
   readonly id: Prisma.FieldRef<"SessionPlayer", 'String'>
   readonly userId: Prisma.FieldRef<"SessionPlayer", 'String'>
+  readonly isActive: Prisma.FieldRef<"SessionPlayer", 'Boolean'>
   readonly gameSessionId: Prisma.FieldRef<"SessionPlayer", 'String'>
   readonly score: Prisma.FieldRef<"SessionPlayer", 'Int'>
   readonly joinedAt: Prisma.FieldRef<"SessionPlayer", 'DateTime'>
