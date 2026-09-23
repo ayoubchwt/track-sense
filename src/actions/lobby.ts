@@ -186,3 +186,20 @@ export async function verifyUserJoined(sessionId: string) {
     };
   return { success: true, data: gameSession };
 }
+
+export async function findPlayerSession() {
+  const user = await getUser();
+  if (!user) return { success: false, error: "Authentication required." };
+  const gameSession = await db.gameSession.findFirstOrThrow({
+    where: {
+      sessionPlayers: {
+        some: {
+          userId: user.id,
+        },
+      },
+    },
+  });
+  if (!gameSession)
+    return { success: false, error: "User is not a part of any session." };
+  return { success: true, data: gameSession };
+}

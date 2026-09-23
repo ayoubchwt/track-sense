@@ -10,8 +10,8 @@ import { type CreateSession } from "@/types/lobby";
 import { generateCode } from "@/lib/utils/helpers";
 import { createSessionSchema } from "@/lib/validations/lobby";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createSessionAction } from "@/actions/lobby";
-import { useState } from "react";
+import { createSessionAction, findPlayerSession } from "@/actions/lobby";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Spinner from "@/components/ui/spinner";
 import ErrorText from "@/components/ui/error-text";
@@ -26,16 +26,27 @@ function CreateSession() {
     register,
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<CreateSession>({
     resolver: zodResolver(createSessionSchema),
     defaultValues: {
-      sessionCode: generateCode(6),
+      sessionCode: "",
       rounds: 5,
       genres: "pop",
       isPublic: false,
     },
   });
+  useEffect(() => {
+    const verifyNotJoined = async () => {
+      const response = await findPlayerSession();
+      if (response.success && response.data)
+        router.push(`/play/${response.data.id}`);
+    };
+    verifyNotJoined();
+    setValue("sessionCode", generateCode(5));
+  }, [setValue, router]);
+
   const sessionCode = useWatch({
     control: control,
     name: "sessionCode",
